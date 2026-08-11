@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>全民生殖健康普及网</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <h1>全民生殖健康普及网</h1>
+        <p class="slogan">普及生殖健康知识 守护家庭幸福</p>
+      </div>
+      <button class="consult-btn" onclick="openConsultModal()">
+        <span class="icon">💬</span>
+        <span>交流咨询</span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="nav-bar">
+    <div class="nav-content">
+      <a href="#hot-section" class="nav-item active">精彩内容</a>
+      <a href="#department-section" class="nav-item">热门推荐</a>
+      <a href="#hospital-section" class="nav-item">医院推荐</a>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <section id="hot-section" class="section">
+      <div class="section-header">
+        <h2 class="section-title"><span class="title-bar"></span>精彩内容</h2>
+        <p class="section-desc">科学普及生殖健康知识 关爱您的生育健康</p>
+      </div>
+
+      <div class="hot-topics" id="hotTopics">
+        <div class="topic-skeleton">加载中...</div>
+      </div>
+
+      <div class="article-list">
+        <h3 class="list-title">更多知识普及文章</h3>
+        <ul class="article-items" id="articleList">
+          <li class="article-item" style="color:#aaa;">加载中...</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="department-section" class="section">
+      <div class="section-header">
+        <h2 class="section-title"><span class="title-bar"></span>热门推荐</h2>
+        <p class="section-desc">专业科室介绍 为您的健康保驾护航</p>
+      </div>
+
+      <div class="dept-grid" id="deptGrid">
+        <div style="grid-column:1/-1;color:#aaa;">加载中...</div>
+      </div>
+    </section>
+
+    <section id="hospital-section" class="section">
+      <div class="section-header">
+        <h2 class="section-title"><span class="title-bar"></span>医院推荐</h2>
+        <p class="section-desc">全国优质生殖医院 值得信赖的专业医疗机构</p>
+      </div>
+
+      <div class="hospital-grid" id="hospitalGrid">
+        <div style="grid-column:1/-1;color:#aaa;">加载中...</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>关于我们</h4>
+        <p>全民生殖健康普及网致力于推广科学的生殖健康知识，为广大群众提供专业的健康咨询服务。</p>
+      </div>
+      <div class="footer-section">
+        <h4>友情链接</h4>
+        <ul>
+          <li><a href="#">国家卫生健康委员会</a></li>
+          <li><a href="#">中国妇幼保健协会</a></li>
+          <li><a href="#">中华医学会</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>联系我们</h4>
+        <p>服务热线：400-888-8888</p>
+        <p>邮箱：service@reprohealth.com</p>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>© 2026 全民生殖健康普及网 版权所有</p>
+    </div>
+  </footer>
+
+  <div id="consultModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>💬 生殖健康在线咨询</h2>
+        <button class="close-btn" onclick="closeConsultModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="chat-container">
+          <div id="chatMessages" class="chat-messages">
+            <div class="message bot-message">
+              <div class="avatar">🏥</div>
+              <div class="message-content">
+                <p>您好！欢迎咨询生殖健康相关问题。请告诉我您的疑问，我会为您解答：</p>
+                <p>常见问题：<br>• 备孕注意事项<br>• 不孕不育原因<br>• 试管婴儿流程<br>• 多囊卵巢治疗<br>• 男性精子质量</p>
+              </div>
+            </div>
+          </div>
+          <div class="chat-input">
+            <input type="text" id="questionInput" placeholder="请输入您的问题..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendQuestion()" class="send-btn">发送</button>
+          </div>
+        </div>
+        <div class="form-section">
+          <div class="form-header">
+            <h3>📝 预约登记</h3>
+            <p>填写以下信息，专业人员将尽快与您联系</p>
+          </div>
+          <form id="customerForm" class="customer-form" onsubmit="submitForm(event)">
+            <div class="form-group">
+              <label for="formName">姓名 *</label>
+              <input type="text" id="formName" name="name" placeholder="请输入您的姓名" required>
+            </div>
+            <div class="form-group">
+              <label>性别 *</label>
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input type="radio" name="formGender" value="男" required>
+                  <span>男</span>
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="formGender" value="女">
+                  <span>女</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="formPhone">电话 *</label>
+              <input type="tel" id="formPhone" name="phone" placeholder="请输入您的手机号码" required>
+            </div>
+            <button type="submit" id="submitBtn" class="submit-btn">提交预约</button>
+          </form>
+          <div id="formMsg" class="form-message"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>

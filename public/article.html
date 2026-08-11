@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文章详情 - 全民生殖健康普及网</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body { background: #f5f8fc; }
+    .page-header {
+      background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+      color: white;
+      padding: 14px 40px;
+      box-shadow: 0 2px 12px rgba(53,122,189,0.2);
+    }
+    .page-header-inner {
+      max-width: 1180px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .logo { font-size: 20px; font-weight: 700; letter-spacing: 1px; }
+    .logo a { color: white; text-decoration: none; }
+    .nav-links a {
+      color: white; text-decoration: none; margin-left: 26px; font-size: 14px; opacity: 0.92;
+    }
+    .nav-links a:hover { opacity: 1; text-decoration: underline; }
+    .consult-btn {
+      background: white; color: #357abd; border: none;
+      padding: 8px 20px; border-radius: 22px; font-weight: 600;
+      cursor: pointer; font-size: 14px; margin-left: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .consult-btn:hover { transform: translateY(-1px); }
+
+    .detail-wrapper {
+      max-width: 1180px; margin: 28px auto 50px; padding: 0 20px;
+      display: grid; grid-template-columns: 1fr 280px; gap: 28px;
+    }
+    .breadcrumb {
+      max-width: 1180px; margin: 18px auto 0; padding: 0 20px;
+      color: #7f8ea8; font-size: 13px;
+    }
+    .breadcrumb a { color: #4a90e2; text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb span { margin: 0 6px; }
+
+    .detail-main {
+      background: white; border-radius: 10px; padding: 40px 50px;
+      box-shadow: 0 4px 18px rgba(53,122,189,0.08);
+      line-height: 1.9;
+    }
+    .detail-tag {
+      display: inline-block; padding: 4px 14px;
+      border-radius: 4px; font-size: 12px; color: white;
+      margin-bottom: 14px;
+    }
+    .t-red{background:#e74c3c;}.t-blue{background:#4a90e2;}.t-green{background:#27ae60;}.t-orange{background:#f39c12;}.t-purple{background:#8e44ad;}.t-pink{background:#e84393;}.t-cyan{background:#0097a7;}.t-yellow{background:#f9a825;color:#333;}
+    .detail-title {
+      font-size: 28px; color: #1f3b5e; font-weight: 700;
+      margin: 8px 0 16px; line-height: 1.45;
+    }
+    .detail-meta {
+      color: #8a99ad; font-size: 13px;
+      padding-bottom: 18px; border-bottom: 1px solid #ecf2f8;
+      margin-bottom: 24px;
+    }
+    .detail-meta span { margin-right: 20px; }
+    .detail-hero-img {
+      width: 100%; max-height: 380px; object-fit: cover;
+      border-radius: 10px; margin: 10px 0 28px;
+      box-shadow: 0 4px 14px rgba(53,122,189,0.12);
+    }
+    .detail-summary-box {
+      background: #f0f7fe; border-left: 4px solid #4a90e2;
+      padding: 14px 20px; border-radius: 6px; margin-bottom: 28px;
+      color: #2c4260; font-size: 15px;
+    }
+    .detail-body { color: #2c4260; font-size: 15.5px; }
+    .detail-body h2 {
+      color: #1f3b5e; font-size: 20px; margin: 28px 0 12px;
+      padding-left: 12px; border-left: 4px solid #4a90e2;
+    }
+    .detail-body h3 {
+      color: #357abd; font-size: 17px; margin: 22px 0 10px;
+    }
+    .detail-body p { margin: 10px 0; }
+    .detail-body ul { padding-left: 22px; margin: 10px 0; }
+    .detail-body li { margin: 6px 0; }
+    .detail-body table { margin: 16px 0; }
+    .info-table-wrap { margin: 18px 0 24px; }
+    .info-table {
+      width: 100%; border-collapse: collapse;
+      border: 1px solid #e3f0fb; border-radius: 6px; overflow: hidden;
+    }
+    .info-table td {
+      padding: 10px 14px; border-bottom: 1px solid #eef5fd;
+      font-size: 14.5px; color: #2c4260;
+    }
+    .info-table td:first-child {
+      background: #f5faff; width: 25%; font-weight: 600; color: #1f3b5e;
+      border-right: 1px solid #eef5fd;
+    }
+    .info-table tr:last-child td { border-bottom: none; }
+
+    .side-card {
+      background: white; border-radius: 10px; padding: 22px;
+      box-shadow: 0 4px 18px rgba(53,122,189,0.08);
+      margin-bottom: 22px;
+    }
+    .side-card h4 {
+      color: #1f3b5e; font-size: 16px; margin-bottom: 14px;
+      padding-bottom: 10px; border-bottom: 2px solid #e8f1fb;
+    }
+    .action-cta {
+      display: block; width: 100%;
+      background: linear-gradient(135deg,#4a90e2,#357abd);
+      color: white !important; text-align: center;
+      padding: 12px; border-radius: 8px;
+      text-decoration: none !important; font-weight: 600;
+      border: none; cursor: pointer; font-size: 15px;
+      margin-bottom: 10px;
+    }
+    .action-cta:hover { transform: translateY(-1px); }
+    .action-cta.secondary { background: white; color: #357abd; border: 1px solid #cfe1f5; }
+    .related-list li {
+      list-style: none; padding: 9px 0;
+      border-bottom: 1px dashed #ecf2f8;
+    }
+    .related-list li:last-child { border-bottom: none; }
+    .related-list a {
+      color: #2c4260; text-decoration: none; font-size: 14px;
+      display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .related-list a:hover { color: #357abd; }
+    .side-tag-group .s-tag {
+      display: inline-block; padding: 4px 12px;
+      background: #eef5fd; color: #357abd;
+      border-radius: 14px; font-size: 12.5px; margin: 4px 6px 4px 0;
+    }
+
+    @media (max-width: 900px) {
+      .detail-wrapper { grid-template-columns: 1fr; }
+      .detail-main { padding: 24px 18px; }
+      .detail-title { font-size: 21px; }
+    }
+
+    #errorBox {
+      max-width: 800px; margin: 80px auto; padding: 40px;
+      background: white; border-radius: 10px; text-align: center;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    }
+    #errorBox h2 { color: #e53935; margin-bottom: 14px; }
+    #errorBox a { color: #357abd; }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <div class="page-header-inner">
+      <div class="logo"><a href="/">🏥 全民生殖健康普及网</a></div>
+      <div class="nav-links">
+        <a href="/#hot-section">精彩内容</a>
+        <a href="/#department-section">热门推荐</a>
+        <a href="/#hospital-section">医院推荐</a>
+        <button class="consult-btn" onclick="parent.postMessage('openConsult','*');location.href='/#consult-top'">💬 交流咨询</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="breadcrumbBar" class="breadcrumb"></div>
+  <div id="mainArea"></div>
+  <div id="errorBox" style="display:none;">
+    <h2 id="errorTitle">404 文章不存在</h2>
+    <p id="errorText" style="color:#777;">该文章可能已被删除或您访问的链接有误。</p>
+    <p><a href="/">← 返回首页</a></p>
+  </div>
+
+  <script>
+    const SECTION_NAME = { hot: '精彩内容', department: '热门推荐', hospital: '医院推荐' };
+    const TAG_CLASS = { red:'t-red',blue:'t-blue',green:'t-green',orange:'t-orange',purple:'t-purple',pink:'t-pink',cyan:'t-cyan',yellow:'t-yellow' };
+
+    function getIdFromUrl() {
+      const m = location.pathname.match(/\/article\/(\d+)/);
+      return m ? Number(m[1]) : null;
+    }
+
+    function escapeHtml(s) {
+      if (s === null || s === undefined) return '';
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    function formatDate(d) {
+      if (!d) return '';
+      const dt = new Date(d);
+      if (isNaN(dt)) return String(d).substring(0,10);
+      return `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}-${String(dt.getDate()).padStart(2,'0')}`;
+    }
+
+    function showError(title, text) {
+      document.getElementById('errorBox').style.display = 'block';
+      document.getElementById('breadcrumbBar').style.display = 'none';
+      document.getElementById('errorTitle').textContent = title || '404 文章不存在';
+      document.getElementById('errorText').textContent = text || '该文章可能已被删除或您访问的链接有误。';
+    }
+
+    async function loadDetail() {
+      const id = getIdFromUrl();
+      if (!id) { showError(); return; }
+      document.getElementById('breadcrumbBar').innerHTML = `
+        <a href="/">首页</a><span>/</span>
+        <span id="crumb-section">加载中...</span><span>/</span>
+        <span id="crumb-title">文章详情</span>
+      `;
+
+      try {
+        const [detailR, listR] = await Promise.all([
+          fetch('/api/articles/full/' + id).then(r => r.json()),
+          fetch('/api/articles').then(r => r.json())
+        ]);
+        if (!detailR.success) { showError(detailR.message); return; }
+        const a = detailR.data;
+        document.title = a.title + ' - 全民生殖健康普及网';
+        document.getElementById('crumb-section').innerHTML =
+          `<a href="/#${a.section}-section">${SECTION_NAME[a.section] || a.section}</a>`;
+        document.getElementById('crumb-title').textContent = a.title;
+
+        const tagCls = TAG_CLASS[a.tag_color] || 't-blue';
+        const tags = (a.extra_tags || '').split(/[,，]/).map(s=>s.trim()).filter(Boolean);
+        const related = (listR.data || []).filter(x => x.section === a.section && x.id !== a.id).slice(0, 8);
+
+        const heroImg = a.image_url
+          ? `<img class="detail-hero-img" src="${escapeHtml(a.image_url)}" alt="${escapeHtml(a.title)}" onerror="this.style.display='none'">`
+          : '';
+        const summaryBox = a.summary
+          ? `<div class="detail-summary-box">💡 ${escapeHtml(a.summary)}</div>`
+          : '';
+
+        let infoTable = '';
+        if (a.section === 'hospital') {
+          infoTable = `<div class="info-table-wrap"><table class="info-table"><tbody>
+            <tr><td>医院名称</td><td>${escapeHtml(a.title)}</td></tr>
+            ${a.level ? `<tr><td>医院等级</td><td>${escapeHtml(a.level)}</td></tr>` : ''}
+            ${a.location ? `<tr><td>所在地址</td><td>📍 ${escapeHtml(a.location)}</td></tr>` : ''}
+            ${tags.length ? `<tr><td>特色标签</td><td>${tags.map(t=>`<span class="s-tag">${escapeHtml(t)}</span>`).join('')}</td></tr>` : ''}
+          </tbody></table></div>`;
+        } else if (a.section === 'department') {
+          infoTable = `<div class="info-table-wrap"><table class="info-table"><tbody>
+            <tr><td>科室名称</td><td>${escapeHtml(a.title)}</td></tr>
+            <tr><td>咨询入口</td><td><a href="/#consult-top" style="color:#357abd;">👉 点击前往在线咨询 / 预约登记</a></td></tr>
+          </tbody></table></div>`;
+        }
+
+        const sideCard1 = `
+          <div class="side-card">
+            <h4>📌 快捷操作</h4>
+            <button class="action-cta" onclick="location.href='/#consult-top'">💬 立即咨询专家</button>
+            <button class="action-cta secondary" onclick="location.href='/'">🏠 回到主页</button>
+          </div>`;
+        const sideCard2 = tags.length ? `
+          <div class="side-card side-tag-group">
+            <h4>🏷 相关标签</h4>
+            ${tags.map(t => `<span class="s-tag">${escapeHtml(t)}</span>`).join('')}
+          </div>` : '';
+        const sideCard3 = related.length ? `
+          <div class="side-card">
+            <h4>🔗 相关${SECTION_NAME[a.section] || '推荐'}</h4>
+            <ul class="related-list">
+              ${related.map(r => `<li><a href="/article/${r.id}">${escapeHtml(r.title)}</a></li>`).join('')}
+            </ul>
+          </div>` : '';
+
+        document.getElementById('mainArea').innerHTML = `
+          <div class="detail-wrapper">
+            <article class="detail-main">
+              ${a.tag_label ? `<span class="detail-tag ${tagCls}">${escapeHtml(a.tag_label)}</span>` : ''}
+              <h1 class="detail-title">${escapeHtml(a.title)}</h1>
+              <div class="detail-meta">
+                <span>📅 发布时间：${formatDate(a.created_at)}</span>
+                <span>🔄 更新时间：${formatDate(a.updated_at)}</span>
+                ${a.is_hot ? '<span style="color:#ef4444;">🔥 热门推荐</span>' : ''}
+              </div>
+              ${heroImg}
+              ${summaryBox}
+              ${infoTable}
+              <div class="detail-body">${a.content || '<p style="color:#888;">暂无详细内容</p>'}</div>
+            </article>
+            <aside>
+              ${sideCard1}${sideCard2}${sideCard3}
+            </aside>
+          </div>
+        `;
+      } catch (e) {
+        console.error(e);
+        showError('加载失败', '请刷新页面或稍后再试：' + (e.message || ''));
+      }
+    }
+
+    loadDetail();
+  </script>
+</body>
+</html>
