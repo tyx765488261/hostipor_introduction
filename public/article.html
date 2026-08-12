@@ -53,7 +53,7 @@
       border-radius: 4px; font-size: 12px; color: white;
       margin-bottom: 14px;
     }
-    .t-red{background:#e74c3c;}.t-blue{background:#4a90e2;}.t-green{background:#27ae60;}.t-orange{background:#f39c12;}.t-purple{background:#8e44ad;}.t-pink{background:#e84393;}.t-cyan{background:#0097a7;}.t-yellow{background:#f9a825;color:#333;}
+    .t-red,.t-blue,.t-green,.t-orange,.t-purple,.t-pink,.t-cyan,.t-yellow{background:#4a90e2;color:#fff;}
     .detail-title {
       font-size: 28px; color: #1f3b5e; font-weight: 700;
       margin: 8px 0 16px; line-height: 1.45;
@@ -156,12 +156,7 @@
   <header class="page-header">
     <div class="page-header-inner">
       <div class="logo"><a href="/">🏥 全民生殖健康普及网</a></div>
-      <div class="nav-links">
-        <a href="/#hot-section">精彩内容</a>
-        <a href="/#department-section">热门推荐</a>
-        <a href="/#hospital-section">医院推荐</a>
-        <button class="consult-btn" onclick="parent.postMessage('openConsult','*');location.href='/#consult-top'">💬 交流咨询</button>
-      </div>
+      <button class="consult-btn" onclick="location.href='/#consult-top'">💬 交流咨询</button>
     </div>
   </header>
 
@@ -173,9 +168,34 @@
     <p><a href="/">← 返回首页</a></p>
   </div>
 
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>关于我们</h4>
+        <p>全民生殖健康普及网致力于推广科学的生殖健康知识，为广大群众提供专业的健康咨询服务。</p>
+      </div>
+      <div class="footer-section">
+        <h4>友情链接</h4>
+        <ul>
+          <li><a href="#">国家卫生健康委员会</a></li>
+          <li><a href="#">中国妇幼保健协会</a></li>
+          <li><a href="#">中华医学会</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>联系我们</h4>
+        <p>服务热线：400-888-8888</p>
+        <p>邮箱：service@reprohealth.com</p>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>© 2026 全民生殖健康普及网 版权所有</p>
+    </div>
+  </footer>
+
   <script>
     const SECTION_NAME = { hot: '精彩内容', department: '热门推荐', hospital: '医院推荐' };
-    const TAG_CLASS = { red:'t-red',blue:'t-blue',green:'t-green',orange:'t-orange',purple:'t-purple',pink:'t-pink',cyan:'t-cyan',yellow:'t-yellow' };
+    const TAG_CLASS = { red:'t-blue',blue:'t-blue',green:'t-blue',orange:'t-blue',purple:'t-blue',pink:'t-blue',cyan:'t-blue',yellow:'t-blue' };
 
     function getIdFromUrl() {
       const m = location.pathname.match(/\/article\/(\d+)/);
@@ -248,18 +268,12 @@
           </tbody></table></div>`;
         }
 
-        const sideCard1 = `
-          <div class="side-card">
-            <h4>📌 快捷操作</h4>
-            <button class="action-cta" onclick="location.href='/#consult-top'">💬 立即咨询专家</button>
-            <button class="action-cta secondary" onclick="location.href='/'">🏠 回到主页</button>
-          </div>`;
-        const sideCard2 = tags.length ? `
+        const sideCard1 = tags.length ? `
           <div class="side-card side-tag-group">
             <h4>🏷 相关标签</h4>
             ${tags.map(t => `<span class="s-tag">${escapeHtml(t)}</span>`).join('')}
           </div>` : '';
-        const sideCard3 = related.length ? `
+        const sideCard2 = related.length ? `
           <div class="side-card">
             <h4>🔗 相关${SECTION_NAME[a.section] || '推荐'}</h4>
             <ul class="related-list">
@@ -275,7 +289,7 @@
               <div class="detail-meta">
                 <span>📅 发布时间：${formatDate(a.created_at)}</span>
                 <span>🔄 更新时间：${formatDate(a.updated_at)}</span>
-                ${a.is_hot ? '<span style="color:#ef4444;">🔥 热门推荐</span>' : ''}
+                ${a.is_hot ? '<span style="color:#357abd;">🔥 热门推荐</span>' : ''}
               </div>
               ${heroImg}
               ${summaryBox}
@@ -283,7 +297,7 @@
               <div class="detail-body">${a.content || '<p style="color:#888;">暂无详细内容</p>'}</div>
             </article>
             <aside>
-              ${sideCard1}${sideCard2}${sideCard3}
+              ${sideCard1}${sideCard2}
             </aside>
           </div>
         `;

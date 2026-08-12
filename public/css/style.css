@@ -143,8 +143,9 @@ body {
 .hot-topics {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
-  gap: 20px;
-  margin-bottom: 30px;
+  grid-template-rows: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 10px;
 }
 
 .topic-card {
@@ -155,6 +156,8 @@ body {
   transition: all 0.3s;
   background: #f8fbff;
   border: 1px solid #e1eaf5;
+  display: flex;
+  flex-direction: column;
 }
 
 .topic-card:hover {
@@ -181,6 +184,7 @@ body {
 
 .topic-card:not(.big-card) img {
   height: 140px;
+  flex-shrink: 0;
 }
 
 .topic-overlay {
@@ -215,41 +219,48 @@ body {
 }
 
 .topic-info {
-  padding: 15px;
+  padding: 14px 16px 18px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .tag {
   display: inline-block;
-  padding: 3px 8px;
+  padding: 3px 10px;
   border-radius: 4px;
   font-size: 12px;
   font-weight: 500;
   margin-bottom: 10px;
+  align-self: flex-start;
 }
 
-.tag-pink, .t-pink { background: #e3f2fd; color: #1976d2; }
-.tag-blue, .t-blue { background: #e3f2fd; color: #1976d2; }
-.tag-green, .t-green { background: #e8f5e9; color: #2e7d32; }
-.tag-orange, .t-orange { background: #fff3e0; color: #ef6c00; }
-.tag-purple, .t-purple { background: #ede7f6; color: #5e35b1; }
-.tag-red, .t-red { background: #ffebee; color: #c62828; }
-.tag-cyan, .t-cyan { background: #e0f7fa; color: #00695c; }
-.tag-yellow, .t-yellow { background: #fffde7; color: #795548; }
+.tag-pink, .t-pink, .tag-blue, .t-blue, .tag-green, .t-green, .tag-orange, .t-orange, .tag-purple, .t-purple, .tag-red, .t-red, .tag-cyan, .t-cyan, .tag-yellow, .t-yellow {
+  background: #e3f2fd;
+  color: #1976d2;
+}
 
 .topic-info h4 {
   font-size: 15px;
   color: #1f3b5e;
   line-height: 1.5;
-  margin-bottom: 8px;
+  margin: 0 0 8px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
+.topic-info .meta {
+  margin-top: auto;
+  padding-top: 6px;
+}
+
 .meta {
   font-size: 12px;
   color: #8a98ac;
+  line-height: 1.5;
 }
 
 .article-list {
@@ -350,14 +361,7 @@ body {
   margin: 0 auto 15px;
 }
 
-.icon-pink { background: #e3f2fd; }
-.icon-blue { background: #e3f2fd; }
-.icon-green { background: #e8f5e9; }
-.icon-orange { background: #fff3e0; }
-.icon-purple { background: #ede7f6; }
-.icon-red { background: #ffebee; }
-.icon-cyan { background: #e0f7fa; }
-.icon-yellow { background: #fffde7; }
+.icon-pink, .icon-blue, .icon-green, .icon-orange, .icon-purple, .icon-red, .icon-cyan, .icon-yellow { background: #e3f2fd; }
 
 .dept-card h3 {
   font-size: 17px;

@@ -14,7 +14,8 @@ const {
   getArticleById,
   createArticle,
   updateArticle,
-  deleteArticle
+  deleteArticle,
+  normFields
 } = require('./database');
 
 let multer = null;
@@ -241,20 +242,14 @@ app.get('/api/articles/:id', async (req, res) => {
 
 app.post('/api/articles', async (req, res) => {
   try {
-    const { section, title } = req.body;
-    if (!section || !['hot', 'department', 'hospital'].includes(section)) {
+    console.log('[POST /api/articles] body=', req.body);
+    const clean = normFields(req.body);
+    if (!clean.section || !['hot', 'department', 'hospital'].includes(clean.section)) {
       return res.status(400).json({ success: false, message: '版块参数错误' });
     }
-    if (!title || !title.trim()) {
+    if (!clean.title) {
       return res.status(400).json({ success: false, message: '标题必填' });
     }
-    const clean = {};
-    for (const k of Object.keys(req.body)) {
-      if (req.body[k] === '') clean[k] = null;
-      else if (req.body[k] !== undefined) clean[k] = req.body[k];
-    }
-    if (clean.is_hot !== undefined) clean.is_hot = clean.is_hot ? 1 : 0;
-    if (clean.sort_order === undefined || clean.sort_order === null) clean.sort_order = 0;
     const id = await createArticle(clean);
     res.json({ success: true, message: '创建成功', id });
   } catch (error) {
@@ -265,17 +260,15 @@ app.post('/api/articles', async (req, res) => {
 
 app.put('/api/articles/:id', async (req, res) => {
   try {
-    const clean = {};
-    for (const k of Object.keys(req.body)) {
-      if (req.body[k] === '') clean[k] = null;
-      else if (req.body[k] !== undefined) clean[k] = req.body[k];
-    }
-    if (clean.is_hot !== undefined) clean.is_hot = clean.is_hot ? 1 : 0;
+    console.log('[PUT /api/articles/' + req.params.id + '] body=', req.body);
+    const clean = normFields(req.body);
+    console.log('[PUT /api/articles/' + req.params.id + '] clean=', clean);
     const rows = await updateArticle(req.params.id, clean);
     if (rows === 0) {
       return res.status(404).json({ success: false, message: '记录不存在' });
     }
-    res.json({ success: true, message: '更新成功' });
+    const latest = await getArticleById(req.params.id);
+    res.json({ success: true, message: '更新成功', data: latest });
   } catch (error) {
     console.error('Update article error:', error);
     res.status(500).json({ success: false, message: '服务器错误：' + error.message });

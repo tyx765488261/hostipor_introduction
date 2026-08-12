@@ -184,7 +184,21 @@ function normFields(data) {
     'tag_label', 'tag_color', 'location', 'level', 'sort_order', 'is_hot', 'extra_tags'];
   for (const k of allowed) {
     if (data[k] === undefined) continue;
-    out[k] = (data[k] === '' || data[k] === null) ? null : data[k];
+    let v = data[k];
+    if (typeof v === 'string') {
+      v = v.replace(/^\s+|\s+$/g, '');
+      if (v === '') v = null;
+    } else if (v === null) {
+      v = null;
+    }
+    out[k] = v;
+  }
+  if (out.image_url !== undefined && out.image_url !== null) {
+    let u = String(out.image_url).trim();
+    if (u && !/^https?:\/\//i.test(u) && !u.startsWith('/')) {
+      u = '/' + u.replace(/^\/+/, '');
+    }
+    out.image_url = u || null;
   }
   if (out.sort_order === undefined) out.sort_order = 0;
   if (out.sort_order !== null) out.sort_order = Number(out.sort_order) || 0;
@@ -196,8 +210,13 @@ async function createArticle(data) {
   if (!clean.section || !clean.title) throw new Error('section和title必填');
   if (mode === 'mysql') {
     const keys = Object.keys(clean);
-    const sql = `INSERT INTO articles (${keys.join(', ')}, created_at, updated_at) VALUES (${keys.map(()=>'?').join(', ')}, NOW(), NOW())`;
-    const [result] = await pool.execute(sql, keys.map(k => clean[k]));
+    const placeholders = keys.map(() => '?').join(', ');
+    const tsFields = keys.length ? ', created_at, updated_at' : 'created_at, updated_at';
+    const tsValues = keys.length ? ', NOW(), NOW()' : 'NOW(), NOW()';
+    const sql = `INSERT INTO articles (${keys.join(', ')}${tsFields}) VALUES (${placeholders}${tsValues})`;
+    const values = keys.map(k => clean[k]);
+    console.log('[DB CREATE] sql=', sql, 'values=', values);
+    const [result] = await pool.execute(sql, values);
     return result.insertId;
   } else {
     const d = ensureArticlesInit();
@@ -216,17 +235,24 @@ async function updateArticle(id, data) {
     const [check] = await pool.execute('SELECT id FROM articles WHERE id = ? LIMIT 1', [id]);
     if (!check || check.length === 0) return 0;
     const keys = Object.keys(clean);
-    if (keys.length === 0) return 1;
-    keys.push('updated_at');
-    const values = keys.map(k => k === 'updated_at' ? null : clean[k]);
+    if (keys.length === 0) {
+      await pool.execute('UPDATE articles SET updated_at = NOW() WHERE id = ?', [id]);
+      return 1;
+    }
+    const setClauses = keys.map(k => `${k} = ?`);
+    setClauses.push('updated_at = NOW()');
+    const values = keys.map(k => clean[k]);
     values.push(id);
-    const sql = `UPDATE articles SET ${keys.map(k => k + (k === 'updated_at' ? ' = NOW()' : ' = ?')).join(', ')} WHERE id = ?`;
-    await pool.execute(sql, values);
+    const sql = `UPDATE articles SET ${setClauses.join(', ')} WHERE id = ?`;
+    console.log('[DB UPDATE] id=', id, 'sql=', sql, 'values=', values);
+    const [result] = await pool.execute(sql, values);
+    console.log('[DB UPDATE] affectedRows=', result && result.affectedRows, 'changedRows=', result && result.changedRows);
     return 1;
   } else {
     const d = ensureArticlesInit();
     const a = d.articles.find(x => x.id === id);
     if (!a) return 0;
+    console.log('[JSON UPDATE] id=', id, 'before keys changed:', Object.keys(clean).filter(k => a[k] !== clean[k]));
     for (const k of Object.keys(clean)) a[k] = clean[k];
     a.updated_at = new Date().toISOString().replace('T', ' ').substring(0, 19);
     writeJson(ARTICLES_FILE, d);
@@ -260,5 +286,6 @@ module.exports = {
   getArticleById,
   createArticle,
   updateArticle,
-  deleteArticle
+  deleteArticle,
+  normFields
 };

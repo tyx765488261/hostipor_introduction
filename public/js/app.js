@@ -11,20 +11,17 @@ function formatDate(d) {
 }
 function tagStyle(color, label) {
   if (!label) return '';
-  const colors = {
-    red: '#e74c3c', blue: '#4a90e2', green: '#27ae60',
-    orange: '#f39c12', purple: '#8e44ad', pink: '#e84393',
-    cyan: '#0097a7', yellow: '#f9a825'
-  };
-  const bg = colors[color] || '#4a90e2';
-  const tc = color === 'yellow' ? '#333' : '#fff';
-  return `<span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:${tc};background:${bg};margin-right:10px;">${escapeHtml(label)}</span>`;
+  return `<span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#1976d2;background:#e3f2fd;margin-right:10px;">${escapeHtml(label)}</span>`;
 }
 
 // ============= 版块1: 精彩内容 =============
 function renderHotSection(list) {
-  const topics = list.filter(a => a.sub_type === 'hot_topic');
+  const hotTopics = list.filter(a => a.sub_type === 'hot_topic');
   const articles = list.filter(a => a.sub_type !== 'hot_topic');
+  const topics = hotTopics.slice(0, 5);
+  while (topics.length < 5 && articles.length) {
+    topics.push(articles.shift());
+  }
   const A = id => `/article/${id}`;
 
   const topicsHtml = topics.length ? topics.map((a, i) => {
@@ -65,28 +62,6 @@ function renderHotSection(list) {
   document.getElementById('articleList').innerHTML = listHtml;
 }
 
-// ============= 版块2: 热门推荐(科室) =============
-const DEPT_ICONS = {
-  '生殖医学中心': '👩‍⚕️', '男科': '👨‍⚕️', '妇科': '🏥', '内分泌科': '🔬',
-  '中医科': '💊', '遗传咨询科': '🧬', '检验科': '🧪', '产前诊断中心': '❤️',
-  '生殖中心': '👩‍⚕️', '不孕不育科': '🧬'
-};
-const ICON_COLORS = ['icon-pink','icon-blue','icon-green','icon-orange','icon-purple','icon-red','icon-cyan','icon-yellow'];
-
-function renderDepartmentSection(list) {
-  const html = list.length ? list.map((a, i) => {
-    const icon = a.tag_label || DEPT_ICONS[a.sub_type || a.title] || '🏥';
-    const iconColor = ICON_COLORS[i % ICON_COLORS.length];
-    return `<a href="/article/${a.id}" class="dept-card">
-      <div class="dept-icon ${iconColor}">${icon}</div>
-      <h3>${escapeHtml(a.title)}</h3>
-      <p>${escapeHtml(a.summary || '')}</p>
-      <span class="more-info">了解详情 →</span>
-    </a>`;
-  }).join('') : `<div style="grid-column:1/-1;color:#aaa;padding:20px;text-align:center;">暂无科室数据</div>`;
-  document.getElementById('deptGrid').innerHTML = html;
-}
-
 // ============= 版块3: 医院推荐 =============
 function renderHospitalSection(list) {
   const html = list.length ? list.map(a => {
@@ -111,17 +86,15 @@ function renderHospitalSection(list) {
 // ============= 加载所有版块 =============
 async function loadAllSections() {
   try {
-    const [hot, dept, hosp] = await Promise.all([
+    const [hot, hosp] = await Promise.all([
       fetch('/api/articles?section=hot').then(r => r.json()),
-      fetch('/api/articles?section=department').then(r => r.json()),
       fetch('/api/articles?section=hospital').then(r => r.json()),
     ]);
     if (hot.success) renderHotSection(hot.data);
-    if (dept.success) renderDepartmentSection(dept.data);
     if (hosp.success) renderHospitalSection(hosp.data);
   } catch (e) {
     console.error('加载版块失败', e);
-    ['hotTopics','articleList','deptGrid','hospitalGrid'].forEach(id => {
+    ['hotTopics','articleList','hospitalGrid'].forEach(id => {
       document.getElementById(id).innerHTML = `<div style="color:#e53935;padding:20px;text-align:center;">数据加载失败，请检查 MySQL 和文章管理后台 <a href="/admin-articles" style="color:#357abd;">/admin-articles</a></div>`;
     });
   }
@@ -286,7 +259,7 @@ document.querySelectorAll('a.nav-item, a[href^="#"]').forEach(a => {
 });
 window.addEventListener('scroll', function() {
   const pos = window.scrollY + 100;
-  const ids = ['hot-section','department-section','hospital-section'];
+  const ids = ['hot-section','knowledge-section','hospital-section'];
   let activeId = 'hot-section';
   for (const id of ids) {
     const el = document.getElementById(id);
