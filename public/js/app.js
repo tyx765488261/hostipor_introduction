@@ -66,7 +66,7 @@ function renderHotSection(list) {
 function renderHospitalSection(list) {
   const html = list.length ? list.map(a => {
     const tags = (a.extra_tags ? a.extra_tags.split(/[,，]/).map(s=>s.trim()).filter(Boolean) : []);
-    return `<a href="/article/${a.id}" class="hospital-card">
+    return `<a href="/hospital/${a.id}" class="hospital-card">
       <div class="hospital-img">
         <img src="${escapeHtml(a.image_url || '')}" alt="${escapeHtml(a.title)}" onerror="this.src='https://via.placeholder.com/500x380/e3f2fd/1976d2?text=医院推荐'">
         ${a.level ? `<span class="hospital-level" style="background:rgba(53,122,189,0.95);">${escapeHtml(a.level)}</span>` : ''}

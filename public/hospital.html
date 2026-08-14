@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>文章详情 - 全民生殖健康普及网</title>
+  <title>医院详情 - 全民生殖健康普及网</title>
   <link rel="stylesheet" href="/css/style.css">
   <style>
     body { background: #f5f8fc; }
@@ -163,8 +163,8 @@
   <div id="breadcrumbBar" class="breadcrumb"></div>
   <div id="mainArea"></div>
   <div id="errorBox" style="display:none;">
-    <h2 id="errorTitle">404 文章不存在</h2>
-    <p id="errorText" style="color:#777;">该文章可能已被删除或您访问的链接有误。</p>
+    <h2 id="errorTitle">404 医院信息不存在</h2>
+    <p id="errorText" style="color:#777;">该医院信息可能已被删除或您访问的链接有误。</p>
     <p><a href="/">← 返回首页</a></p>
   </div>
 
@@ -194,11 +194,10 @@
   </footer>
 
   <script>
-    const SECTION_NAME = { hot: '精彩内容', department: '热门推荐', hospital: '医院推荐' };
     const TAG_CLASS = { red:'t-blue',blue:'t-blue',green:'t-blue',orange:'t-blue',purple:'t-blue',pink:'t-blue',cyan:'t-blue',yellow:'t-blue' };
 
     function getIdFromUrl() {
-      const m = location.pathname.match(/\/article\/(\d+)/);
+      const m = location.pathname.match(/\/hospital\/(\d+)/);
       return m ? Number(m[1]) : null;
     }
 
@@ -217,8 +216,8 @@
     function showError(title, text) {
       document.getElementById('errorBox').style.display = 'block';
       document.getElementById('breadcrumbBar').style.display = 'none';
-      document.getElementById('errorTitle').textContent = title || '404 文章不存在';
-      document.getElementById('errorText').textContent = text || '该文章可能已被删除或您访问的链接有误。';
+      document.getElementById('errorTitle').textContent = title || '404 医院信息不存在';
+      document.getElementById('errorText').textContent = text || '该医院信息可能已被删除或您访问的链接有误。';
     }
 
     async function loadDetail() {
@@ -226,29 +225,29 @@
       if (!id) { showError(); return; }
       document.getElementById('breadcrumbBar').innerHTML = `
         <a href="/">首页</a><span>/</span>
-        <span id="crumb-section">加载中...</span><span>/</span>
-        <span id="crumb-title">文章详情</span>
+        <a href="/#hospital-section">医院推荐</a><span>/</span>
+        <span id="crumb-title">医院详情</span>
       `;
 
       try {
         const [detailR, listR] = await Promise.all([
           fetch('/api/articles/full/' + id).then(r => r.json()),
-          fetch('/api/articles').then(r => r.json())
+          fetch('/api/articles?section=hospital').then(r => r.json())
         ]);
         if (!detailR.success) { showError(detailR.message); return; }
         const a = detailR.data;
-        if (a.section === 'hospital') {
-          location.href = '/hospital/' + id;
+
+        if (a.section !== 'hospital') {
+          location.href = '/article/' + id;
           return;
         }
+
         document.title = a.title + ' - 全民生殖健康普及网';
-        document.getElementById('crumb-section').innerHTML =
-          `<a href="/#${a.section}-section">${SECTION_NAME[a.section] || a.section}</a>`;
         document.getElementById('crumb-title').textContent = a.title;
 
         const tagCls = TAG_CLASS[a.tag_color] || 't-blue';
         const tags = (a.extra_tags || '').split(/[,，]/).map(s=>s.trim()).filter(Boolean);
-        const related = (listR.data || []).filter(x => x.section === a.section && x.id !== a.id).slice(0, 8);
+        const related = (listR.data || []).filter(x => x.id !== a.id).slice(0, 8);
 
         const heroImg = a.image_url
           ? `<img class="detail-hero-img" src="${escapeHtml(a.image_url)}" alt="${escapeHtml(a.title)}" onerror="this.style.display='none'">`
@@ -257,20 +256,12 @@
           ? `<div class="detail-summary-box">💡 ${escapeHtml(a.summary)}</div>`
           : '';
 
-        let infoTable = '';
-        if (a.section === 'hospital') {
-          infoTable = `<div class="info-table-wrap"><table class="info-table"><tbody>
-            <tr><td>医院名称</td><td>${escapeHtml(a.title)}</td></tr>
-            ${a.level ? `<tr><td>医院等级</td><td>${escapeHtml(a.level)}</td></tr>` : ''}
-            ${a.location ? `<tr><td>所在地址</td><td>📍 ${escapeHtml(a.location)}</td></tr>` : ''}
-            ${tags.length ? `<tr><td>特色标签</td><td>${tags.map(t=>`<span class="s-tag">${escapeHtml(t)}</span>`).join('')}</td></tr>` : ''}
-          </tbody></table></div>`;
-        } else if (a.section === 'department') {
-          infoTable = `<div class="info-table-wrap"><table class="info-table"><tbody>
-            <tr><td>科室名称</td><td>${escapeHtml(a.title)}</td></tr>
-            <tr><td>咨询入口</td><td><a href="/#consult-top" style="color:#357abd;">👉 点击前往在线咨询 / 预约登记</a></td></tr>
-          </tbody></table></div>`;
-        }
+        const infoTable = `<div class="info-table-wrap"><table class="info-table"><tbody>
+          <tr><td>医院名称</td><td>${escapeHtml(a.title)}</td></tr>
+          ${a.level ? `<tr><td>医院等级</td><td>${escapeHtml(a.level)}</td></tr>` : ''}
+          ${a.location ? `<tr><td>所在地址</td><td>📍 ${escapeHtml(a.location)}</td></tr>` : ''}
+          ${tags.length ? `<tr><td>特色标签</td><td>${tags.map(t=>`<span class="s-tag">${escapeHtml(t)}</span>`).join('')}</td></tr>` : ''}
+        </tbody></table></div>`;
 
         const sideCard1 = tags.length ? `
           <div class="side-card side-tag-group">
@@ -279,11 +270,17 @@
           </div>` : '';
         const sideCard2 = related.length ? `
           <div class="side-card">
-            <h4>🔗 相关${SECTION_NAME[a.section] || '推荐'}</h4>
+            <h4>🏥 更多医院推荐</h4>
             <ul class="related-list">
-              ${related.map(r => `<li><a href="${r.section === 'hospital' ? '/hospital' : '/article'}/${r.id}">${escapeHtml(r.title)}</a></li>`).join('')}
+              ${related.map(r => `<li><a href="/hospital/${r.id}">${escapeHtml(r.title)}</a></li>`).join('')}
             </ul>
           </div>` : '';
+        const sideCard0 = `
+          <div class="side-card">
+            <h4>📞 就诊服务</h4>
+            <a class="action-cta" href="/#consult-top">💬 在线咨询预约</a>
+            <a class="action-cta secondary" href="/#hospital-section">🏠 查看更多医院</a>
+          </div>`;
 
         document.getElementById('mainArea').innerHTML = `
           <div class="detail-wrapper">
@@ -291,17 +288,17 @@
               ${a.tag_label ? `<span class="detail-tag ${tagCls}">${escapeHtml(a.tag_label)}</span>` : ''}
               <h1 class="detail-title">${escapeHtml(a.title)}</h1>
               <div class="detail-meta">
-                <span>📅 发布时间：${formatDate(a.created_at)}</span>
-                <span>🔄 更新时间：${formatDate(a.updated_at)}</span>
-                ${a.is_hot ? '<span style="color:#357abd;">🔥 热门推荐</span>' : ''}
+                ${a.level ? `<span>🏅 等级：${escapeHtml(a.level)}</span>` : ''}
+                ${a.location ? `<span>📍 地址：${escapeHtml(a.location)}</span>` : ''}
+                <span>📅 更新时间：${formatDate(a.updated_at)}</span>
               </div>
               ${heroImg}
               ${summaryBox}
               ${infoTable}
-              <div class="detail-body">${a.content || '<p style="color:#888;">暂无详细内容</p>'}</div>
+              <div class="detail-body">${a.content || '<p style="color:#888;">暂无详细介绍</p>'}</div>
             </article>
             <aside>
-              ${sideCard1}${sideCard2}
+              ${sideCard0}${sideCard1}${sideCard2}
             </aside>
           </div>
         `;

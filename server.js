@@ -292,6 +292,10 @@ app.get('/article/:id', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'article.html'));
 });
 
+app.get('/hospital/:id', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'hospital.html'));
+});
+
 app.get('/api/articles/full/:id', async (req, res) => {
   try {
     const data = await getArticleById(req.params.id);
