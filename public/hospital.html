@@ -275,12 +275,6 @@
               ${related.map(r => `<li><a href="/hospital/${r.id}">${escapeHtml(r.title)}</a></li>`).join('')}
             </ul>
           </div>` : '';
-        const sideCard0 = `
-          <div class="side-card">
-            <h4>📞 就诊服务</h4>
-            <a class="action-cta" href="/#consult-top">💬 在线咨询预约</a>
-            <a class="action-cta secondary" href="/#hospital-section">🏠 查看更多医院</a>
-          </div>`;
 
         document.getElementById('mainArea').innerHTML = `
           <div class="detail-wrapper">
@@ -298,7 +292,7 @@
               <div class="detail-body">${a.content || '<p style="color:#888;">暂无详细介绍</p>'}</div>
             </article>
             <aside>
-              ${sideCard0}${sideCard1}${sideCard2}
+              ${sideCard1}${sideCard2}
             </aside>
           </div>
         `;
