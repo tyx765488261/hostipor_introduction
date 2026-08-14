@@ -22,7 +22,10 @@ function renderHotSection(list) {
   while (topics.length < 5 && articles.length) {
     topics.push(articles.shift());
   }
-  const A = id => `/article/${id}`;
+  const isFileProtocol = location.protocol === 'file:';
+  const A = id => isFileProtocol ? `article-${id}.html` : `/article/${id}`;
+  const H = id => isFileProtocol ? `hospital-${id}.html` : `/hospital/${id}`;
+  const adminLink = isFileProtocol ? 'admin-articles.html' : '/admin-articles';
 
   const topicsHtml = topics.length ? topics.map((a, i) => {
     const isBig = i === 0;
@@ -66,7 +69,7 @@ function renderHotSection(list) {
 function renderHospitalSection(list) {
   const html = list.length ? list.map(a => {
     const tags = (a.extra_tags ? a.extra_tags.split(/[,，]/).map(s=>s.trim()).filter(Boolean) : []);
-    return `<a href="/hospital/${a.id}" class="hospital-card">
+    return `<a href="${H(a.id)}" class="hospital-card">
       <div class="hospital-img">
         <img src="${escapeHtml(a.image_url || '')}" alt="${escapeHtml(a.title)}" onerror="this.src='https://via.placeholder.com/500x380/e3f2fd/1976d2?text=医院推荐'">
         ${a.level ? `<span class="hospital-level" style="background:rgba(53,122,189,0.95);">${escapeHtml(a.level)}</span>` : ''}
@@ -85,6 +88,7 @@ function renderHospitalSection(list) {
 
 // ============= 加载所有版块 =============
 async function loadAllSections() {
+  if (location.protocol === 'file:') return;
   try {
     const [hot, hosp] = await Promise.all([
       fetch('/api/articles?section=hot').then(r => r.json()),
@@ -95,7 +99,7 @@ async function loadAllSections() {
   } catch (e) {
     console.error('加载版块失败', e);
     ['hotTopics','articleList','hospitalGrid'].forEach(id => {
-      document.getElementById(id).innerHTML = `<div style="color:#e53935;padding:20px;text-align:center;">数据加载失败，请检查 MySQL 和文章管理后台 <a href="/admin-articles" style="color:#357abd;">/admin-articles</a></div>`;
+      document.getElementById(id).innerHTML = `<div style="color:#e53935;padding:20px;text-align:center;">数据加载失败，请检查 MySQL 和文章管理后台 <a href="${adminLink}" style="color:#357abd;">${adminLink}</a></div>`;
     });
   }
 }

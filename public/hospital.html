@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>医院详情 - 全民生殖健康普及网</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="css/style.css">
   <style>
     body { background: #f5f8fc; }
     .page-header {
@@ -155,14 +155,14 @@
 <body>
   <header class="page-header">
     <div class="page-header-inner">
-      <div class="logo"><a href="/">🏥 全民生殖健康普及网</a></div>
+      <div class="logo"><a href="index.html">🏥 全民生殖健康普及网</a></div>
       <button class="consult-btn" onclick="openConsultModal()">💬 交流咨询</button>
     </div>
   </header>
 
   <div id="breadcrumbBar" class="breadcrumb">
-    <a href="/">首页</a><span>/</span>
-    <a href="/#hospital-section">医院推荐</a><span>/</span>
+    <a href="index.html">首页</a><span>/</span>
+    <a href="index.html#hospital-section">医院推荐</a><span>/</span>
     <span id="crumb-title">北京协和医院生殖医学中心</span>
   </div>
 
@@ -224,11 +224,11 @@
         <div class="side-card">
           <h4>🏥 更多医院推荐</h4>
           <ul class="related-list">
-            <li><a href="/hospital/61">北京大学第三医院生殖医学中心</a></li>
-            <li><a href="/hospital/62">上海瑞金医院生殖医学中心</a></li>
-            <li><a href="/hospital/63">广州中山一院生殖医学中心</a></li>
-            <li><a href="/hospital/64">华西第二医院生殖医学中心</a></li>
-            <li><a href="/hospital/65">浙江大学医学院附属妇产科医院</a></li>
+            <li><a href="hospital-61.html">北京大学第三医院生殖医学中心</a></li>
+            <li><a href="hospital-62.html">上海瑞金医院生殖医学中心</a></li>
+            <li><a href="hospital-63.html">广州中山一院生殖医学中心</a></li>
+            <li><a href="hospital-64.html">华西第二医院生殖医学中心</a></li>
+            <li><a href="hospital-65.html">浙江大学医学院附属妇产科医院</a></li>
           </ul>
         </div>
       </aside>
@@ -237,7 +237,7 @@
   <div id="errorBox" style="display:none;">
     <h2 id="errorTitle">404 医院信息不存在</h2>
     <p id="errorText" style="color:#777;">该医院信息可能已被删除或您访问的链接有误。</p>
-    <p><a href="/">← 返回首页</a></p>
+    <p><a href="index.html">← 返回首页</a></p>
   </div>
 
   <div id="consultModal" class="modal">
@@ -377,7 +377,7 @@
       })();
       (function(){
         var s=document.createElement('script');
-        s.src='/js/app.js';
+        s.src='js/app.js';
         s.onload=function(){
           try{ if(typeof loadAllSections==='function') loadAllSections(); }catch(err){ console.warn(err); }
           if(typeof window.loadHospitalDetailDynamic === 'function') window.loadHospitalDetailDynamic();
@@ -413,8 +413,15 @@
         async function loadDetail() {
           var id = getIdFromUrl();
           if (!id) { showError(); return; }
+          if (location.protocol === 'file:') return;
+          var isFileProtocol = location.protocol === 'file:';
+          var articlePrefix = isFileProtocol ? 'article-' : '/article/';
+          var articleSuffix = isFileProtocol ? '.html' : '';
+          var hospitalPrefix = isFileProtocol ? 'hospital-' : '/hospital/';
+          var hospitalSuffix = isFileProtocol ? '.html' : '';
+          var homeLink = isFileProtocol ? 'index.html' : '/';
           document.getElementById('breadcrumbBar').innerHTML =
-            '<a href="/">首页</a><span>/</span><a href="/#hospital-section">医院推荐</a><span>/</span><span id="crumb-title">医院详情</span>';
+            '<a href="' + homeLink + '">首页</a><span>/</span><a href="' + homeLink + '#hospital-section">医院推荐</a><span>/</span><span id="crumb-title">医院详情</span>';
           try {
             var res = await Promise.all([
               fetch('/api/articles/full/' + id).then(function (r) { return r.json(); }),
@@ -424,7 +431,7 @@
             if (!detailR.success) { showError(detailR.message); return; }
             var a = detailR.data;
             if (a.section !== 'hospital') {
-              location.href = '/article/' + id;
+              location.href = articlePrefix + id + articleSuffix;
               return;
             }
             document.title = a.title + ' - 全民生殖健康普及网';
@@ -452,7 +459,7 @@
               ? '<div class="side-card side-tag-group"><h4>🏷 相关标签</h4>' + tags.map(function (t) { return '<span class="s-tag">' + escapeHtml(t) + '</span>'; }).join('') + '</div>'
               : '';
             var sideCard2 = related.length
-              ? '<div class="side-card"><h4>🏥 更多医院推荐</h4><ul class="related-list">' + related.map(function (r) { return '<li><a href="/hospital/' + r.id + '">' + escapeHtml(r.title) + '</a></li>'; }).join('') + '</ul></div>'
+              ? '<div class="side-card"><h4>🏥 更多医院推荐</h4><ul class="related-list">' + related.map(function (r) { return '<li><a href="' + hospitalPrefix + r.id + hospitalSuffix + '">' + escapeHtml(r.title) + '</a></li>'; }).join('') + '</ul></div>'
               : '';
 
             document.getElementById('mainArea').innerHTML =

@@ -97,16 +97,15 @@
         </div>
       </div>
       <div style="display:flex;align-items:center;gap:14px;">
-        <label style="display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;">
+        <div id="dynSwitchWrap" style="display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;padding:6px 8px;margin:-6px -8px;border-radius:8px;">
           <div style="position:relative;width:56px;height:30px;background:#cbd5e1;border-radius:15px;transition:background 0.3s;" id="dynTrack">
             <div style="position:absolute;top:3px;left:3px;width:24px;height:24px;background:white;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.2);transition:left 0.3s;" id="dynThumb"></div>
           </div>
-          <input type="checkbox" id="dynToggle" style="display:none;" onchange="toggleDynamicMode()">
           <div>
             <div style="font-size:14px;font-weight:600;color:#1f3b5e;" id="dynLabel">当前：静态模式</div>
             <div style="font-size:11.5px;color:#6b7e94;" id="dynHint">点击开关可切换</div>
           </div>
-        </label>
+        </div>
         <button class="btn btn-secondary" onclick="clearAndGotoHome()">🧹 清除并回首页验证</button>
       </div>
     </div>
@@ -537,7 +536,6 @@
   // ===== 前台数据模式切换开关 =====
   function applyDynamicToggleUI() {
     var on = localStorage.getItem('DYNAMIC_MODE') === '1';
-    document.getElementById('dynToggle').checked = on;
     var track = document.getElementById('dynTrack');
     var thumb = document.getElementById('dynThumb');
     var label = document.getElementById('dynLabel');
@@ -557,25 +555,27 @@
     }
   }
   function toggleDynamicMode() {
-    var on = document.getElementById('dynToggle').checked;
-    localStorage.setItem('DYNAMIC_MODE', on ? '1' : '0');
+    var on = localStorage.getItem('DYNAMIC_MODE') === '1';
+    var nextOn = !on;
+    localStorage.setItem('DYNAMIC_MODE', nextOn ? '1' : '0');
     applyDynamicToggleUI();
-    if (on) {
-      toast('已切换到动态模式，刷新前台页面即可生效');
+    if (nextOn) {
+      toast('已切换到动态模式，刷新前台页面即可生效', 'success');
     } else {
-      toast('已切换到静态模式，刷新前台页面即可生效');
+      toast('已切换到静态模式，刷新前台页面即可生效', 'success');
     }
   }
   function clearAndGotoHome() {
     localStorage.removeItem('DYNAMIC_MODE');
     try { sessionStorage.clear(); } catch (e) {}
     applyDynamicToggleUI();
-    toast('已清除开关缓存，3 秒后跳回首页...');
+    toast('已清除开关缓存，1.5 秒后跳回首页...', 'success');
     setTimeout(function () { location.href = '/'; }, 1500);
   }
-  // 点击开关可视化轨道也能切换
-  document.getElementById('dynTrack').addEventListener('click', function () {
-    document.getElementById('dynToggle').click();
+  // 外层整个区域点击即切换（包括开关、文字），避免双重触发
+  document.getElementById('dynSwitchWrap').addEventListener('click', function (e) {
+    e.preventDefault();
+    toggleDynamicMode();
   });
   applyDynamicToggleUI();
 
