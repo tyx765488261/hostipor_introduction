@@ -87,6 +87,30 @@
 
   <div class="container">
     <div id="statBar" class="stat-bar">数据统计加载中...</div>
+
+    <div style="background:linear-gradient(135deg,#eaf4ff,#fefefe);border:1px solid #cfe1f5;border-radius:10px;padding:16px 20px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;box-shadow:0 2px 12px rgba(53,122,189,0.06);">
+      <div>
+        <div style="font-size:15px;font-weight:600;color:#1f3b5e;margin-bottom:4px;">⚙️ 前台数据模式切换</div>
+        <div style="font-size:12.5px;color:#6b7e94;">
+          <strong>静态模式（默认）</strong>：所有首页 / 文章详情 / 医院详情直接展示预置静态内容，不请求接口。<br>
+          <strong>动态模式（开启后）</strong>：前台页面会从本管理后台的接口加载真实文章 / 医院 / 科室数据。
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <label style="display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;">
+          <div style="position:relative;width:56px;height:30px;background:#cbd5e1;border-radius:15px;transition:background 0.3s;" id="dynTrack">
+            <div style="position:absolute;top:3px;left:3px;width:24px;height:24px;background:white;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.2);transition:left 0.3s;" id="dynThumb"></div>
+          </div>
+          <input type="checkbox" id="dynToggle" style="display:none;" onchange="toggleDynamicMode()">
+          <div>
+            <div style="font-size:14px;font-weight:600;color:#1f3b5e;" id="dynLabel">当前：静态模式</div>
+            <div style="font-size:11.5px;color:#6b7e94;" id="dynHint">点击开关可切换</div>
+          </div>
+        </label>
+        <button class="btn btn-secondary" onclick="clearAndGotoHome()">🧹 清除并回首页验证</button>
+      </div>
+    </div>
+
     <div class="toolbar">
       <div class="filters">
         <label>版块筛选：</label>
@@ -509,6 +533,51 @@
 
   document.getElementById('searchKw').addEventListener('keydown', e => { if (e.key === 'Enter') loadArticles(); });
   document.getElementById('articleModal').addEventListener('click', e => { if (e.target.id === 'articleModal') closeModal(); });
+
+  // ===== 前台数据模式切换开关 =====
+  function applyDynamicToggleUI() {
+    var on = localStorage.getItem('DYNAMIC_MODE') === '1';
+    document.getElementById('dynToggle').checked = on;
+    var track = document.getElementById('dynTrack');
+    var thumb = document.getElementById('dynThumb');
+    var label = document.getElementById('dynLabel');
+    var hint = document.getElementById('dynHint');
+    if (on) {
+      track.style.background = 'linear-gradient(135deg,#4a90e2,#357abd)';
+      thumb.style.left = '29px';
+      label.textContent = '当前：动态模式';
+      label.style.color = '#357abd';
+      hint.textContent = '前台页面将从接口加载真实数据';
+    } else {
+      track.style.background = '#cbd5e1';
+      thumb.style.left = '3px';
+      label.textContent = '当前：静态模式';
+      label.style.color = '#1f3b5e';
+      hint.textContent = '前台页面直接展示预置静态内容';
+    }
+  }
+  function toggleDynamicMode() {
+    var on = document.getElementById('dynToggle').checked;
+    localStorage.setItem('DYNAMIC_MODE', on ? '1' : '0');
+    applyDynamicToggleUI();
+    if (on) {
+      toast('已切换到动态模式，刷新前台页面即可生效');
+    } else {
+      toast('已切换到静态模式，刷新前台页面即可生效');
+    }
+  }
+  function clearAndGotoHome() {
+    localStorage.removeItem('DYNAMIC_MODE');
+    try { sessionStorage.clear(); } catch (e) {}
+    applyDynamicToggleUI();
+    toast('已清除开关缓存，3 秒后跳回首页...');
+    setTimeout(function () { location.href = '/'; }, 1500);
+  }
+  // 点击开关可视化轨道也能切换
+  document.getElementById('dynTrack').addEventListener('click', function () {
+    document.getElementById('dynToggle').click();
+  });
+  applyDynamicToggleUI();
 
   bindImageEvents();
   loadArticles();

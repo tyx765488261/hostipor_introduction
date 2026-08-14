@@ -156,17 +156,147 @@
   <header class="page-header">
     <div class="page-header-inner">
       <div class="logo"><a href="/">🏥 全民生殖健康普及网</a></div>
-      <button class="consult-btn" onclick="location.href='/#consult-top'">💬 交流咨询</button>
+      <button class="consult-btn" onclick="openConsultModal()">💬 交流咨询</button>
     </div>
   </header>
 
-  <div id="breadcrumbBar" class="breadcrumb"></div>
-  <div id="mainArea"></div>
+  <div id="breadcrumbBar" class="breadcrumb">
+    <a href="/">首页</a><span>/</span>
+    <a href="/#hospital-section">医院推荐</a><span>/</span>
+    <span id="crumb-title">北京协和医院生殖医学中心</span>
+  </div>
+
+  <div id="mainArea">
+    <div class="detail-wrapper">
+      <article class="detail-main">
+        <h1 class="detail-title">北京协和医院生殖医学中心</h1>
+        <div class="detail-meta">
+          <span>🏅 等级：三级甲等</span>
+          <span>📍 地址：北京市东城区</span>
+          <span>📅 更新时间：2026-08-01</span>
+        </div>
+        <img class="detail-hero-img" src="" alt="北京协和医院生殖医学中心" style="background:#e3f2fd;">
+        <div class="detail-summary-box">💡 国家重点学科，国内生殖医学领域权威机构</div>
+
+        <div class="info-table-wrap">
+          <table class="info-table">
+            <tbody>
+              <tr><td>医院名称</td><td>北京协和医院生殖医学中心</td></tr>
+              <tr><td>医院等级</td><td>三级甲等</td></tr>
+              <tr><td>所在地址</td><td>📍 北京市东城区</td></tr>
+              <tr><td>特色标签</td><td>
+                <span class="s-tag">国家重点学科</span>
+                <span class="s-tag">试管成功率高</span>
+              </td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="detail-body">
+          <h2>北京协和医院生殖医学中心 · 三级甲等</h2>
+          <p>国家重点学科，国内生殖医学领域权威机构</p>
+          <h3>基本信息</h3>
+          <table style="width:100%;border-collapse:collapse;margin:10px 0;">
+            <tbody>
+              <tr><td style="width:25%;padding:8px 12px;border:1px solid #e3f0fb;background:#f5faff;font-weight:bold;">医院名称</td><td style="padding:8px 12px;border:1px solid #e3f0fb;">北京协和医院生殖医学中心</td></tr>
+              <tr><td style="padding:8px 12px;border:1px solid #e3f0fb;background:#f5faff;font-weight:bold;">医院等级</td><td style="padding:8px 12px;border:1px solid #e3f0fb;">三级甲等</td></tr>
+              <tr><td style="padding:8px 12px;border:1px solid #e3f0fb;background:#f5faff;font-weight:bold;">所在地址</td><td style="padding:8px 12px;border:1px solid #e3f0fb;">北京市东城区</td></tr>
+              <tr><td style="padding:8px 12px;border:1px solid #e3f0fb;background:#f5faff;font-weight:bold;">特色标签</td><td style="padding:8px 12px;border:1px solid #e3f0fb;">国家重点学科、试管成功率高</td></tr>
+            </tbody>
+          </table>
+          <h3>就医前须知</h3>
+          <ul>
+            <li>就诊前请提前通过官方渠道预约挂号，避免空跑</li>
+            <li>携带好身份证、医保卡、既往病历和检查报告</li>
+            <li>如需做抽血、激素检查请提前按医嘱空腹</li>
+            <li>异地就医患者建议提前了解医保报销政策</li>
+          </ul>
+          <h3>免责声明</h3>
+          <p>本站提供的医院信息仅供参考就医指引，不作为诊疗依据；具体科室排班、挂号规则、费用等请以医院官方最新公告为准。</p>
+          <p style="text-align:right;color:#999;margin-top:30px;">—— 全民生殖健康普及网 · 医院推荐</p>
+        </div>
+      </article>
+      <aside>
+        <div class="side-card side-tag-group">
+          <h4>🏷 相关标签</h4>
+          <span class="s-tag">国家重点学科</span><span class="s-tag">试管成功率高</span><span class="s-tag">三级甲等</span>
+        </div>
+        <div class="side-card">
+          <h4>🏥 更多医院推荐</h4>
+          <ul class="related-list">
+            <li><a href="/hospital/61">北京大学第三医院生殖医学中心</a></li>
+            <li><a href="/hospital/62">上海瑞金医院生殖医学中心</a></li>
+            <li><a href="/hospital/63">广州中山一院生殖医学中心</a></li>
+            <li><a href="/hospital/64">华西第二医院生殖医学中心</a></li>
+            <li><a href="/hospital/65">浙江大学医学院附属妇产科医院</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
   <div id="errorBox" style="display:none;">
     <h2 id="errorTitle">404 医院信息不存在</h2>
     <p id="errorText" style="color:#777;">该医院信息可能已被删除或您访问的链接有误。</p>
     <p><a href="/">← 返回首页</a></p>
   </div>
+
+  <div id="consultModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>💬 生殖健康在线咨询</h2>
+        <button class="close-btn" onclick="closeConsultModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="chat-container">
+          <div id="chatMessages" class="chat-messages">
+            <div class="message bot-message">
+              <div class="avatar">🏥</div>
+              <div class="message-content">
+                <p>您好！欢迎咨询生殖健康相关问题。可前往文章管理后台启用「动态数据模式」后体验智能问答功能。</p>
+                <p>常见问题：<br>• 备孕注意事项<br>• 不孕不育原因<br>• 试管婴儿流程<br>• 多囊卵巢治疗<br>• 男性精子质量</p>
+              </div>
+            </div>
+          </div>
+          <div class="chat-input">
+            <input type="text" id="questionInput" placeholder="启用动态模式后可发送问题..." disabled onkeypress="handleKeyPress(event)">
+            <button onclick="sendQuestion()" class="send-btn" disabled>发送</button>
+          </div>
+        </div>
+        <div class="form-section">
+          <div class="form-header">
+            <h3>📝 预约登记</h3>
+            <p>填写以下信息，专业人员将尽快与您联系</p>
+          </div>
+          <form id="customerForm" class="customer-form" onsubmit="submitForm(event)">
+            <div class="form-group">
+              <label for="formName">姓名 *</label>
+              <input type="text" id="formName" name="name" placeholder="请输入您的姓名" required>
+            </div>
+            <div class="form-group">
+              <label>性别 *</label>
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input type="radio" name="formGender" value="男" required>
+                  <span>男</span>
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="formGender" value="女">
+                  <span>女</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="formPhone">电话 *</label>
+              <input type="tel" id="formPhone" name="phone" placeholder="请输入您的手机号码" required>
+            </div>
+            <button type="submit" id="submitBtn" class="submit-btn">提交预约</button>
+          </form>
+          <div id="formMsg" class="form-message"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a id="consult-top" style="display:block;height:0;overflow:hidden;"></a>
 
   <footer class="footer">
     <div class="footer-content">
@@ -194,115 +324,160 @@
   </footer>
 
   <script>
-    const TAG_CLASS = { red:'t-blue',blue:'t-blue',green:'t-blue',orange:'t-blue',purple:'t-blue',pink:'t-blue',cyan:'t-blue',yellow:'t-blue' };
-
-    function getIdFromUrl() {
-      const m = location.pathname.match(/\/hospital\/(\d+)/);
-      return m ? Number(m[1]) : null;
+    // ===== 首页同款：交流咨询 Modal 基础交互（静态模式保留） =====
+    function openConsultModal(){
+      document.getElementById('consultModal').classList.add('active');
+      document.body.style.overflow='hidden';
     }
-
-    function escapeHtml(s) {
-      if (s === null || s === undefined) return '';
-      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    function closeConsultModal(){
+      document.getElementById('consultModal').classList.remove('active');
+      document.body.style.overflow='';
     }
-
-    function formatDate(d) {
-      if (!d) return '';
-      const dt = new Date(d);
-      if (isNaN(dt)) return String(d).substring(0,10);
-      return `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}-${String(dt.getDate()).padStart(2,'0')}`;
+    (function(){
+      var cm=document.getElementById('consultModal');
+      if(cm) cm.addEventListener('click',function(e){ if(e.target===cm) closeConsultModal(); });
+    })();
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeConsultModal(); });
+    function handleKeyPress(e){
+      if(e.key==='Enter'){e.preventDefault();sendQuestion();}
     }
-
-    function showError(title, text) {
-      document.getElementById('errorBox').style.display = 'block';
-      document.getElementById('breadcrumbBar').style.display = 'none';
-      document.getElementById('errorTitle').textContent = title || '404 医院信息不存在';
-      document.getElementById('errorText').textContent = text || '该医院信息可能已被删除或您访问的链接有误。';
+    function sendQuestion(){/* 动态模式下由 app.js 覆盖实现 */}
+    function submitForm(e){
+      if(e&&e.preventDefault) e.preventDefault();
+      var name=document.getElementById('formName').value.trim();
+      var gender=document.querySelector('input[name="formGender"]:checked');
+      var phone=document.getElementById('formPhone').value.trim();
+      var msg=document.getElementById('formMsg');
+      msg.style.display='block';
+      msg.style.color='#e53935';
+      if(!name){msg.textContent='请填写姓名';return;}
+      if(!gender){msg.textContent='请选择性别';return;}
+      if(!/^1[3-9]\d{9}$/.test(phone)){msg.textContent='请填写正确的11位手机号';return;}
+      if(!window.__DYNAMIC_MODE__){
+        msg.textContent='当前为静态模式，可前往 /admin-articles 启用动态数据后提交。';
+        return;
+      }
+      msg.textContent='正在提交...';
+      /* 动态模式下由 app.js 处理 */
+      return false;
     }
+    (function(){
+      var sb=document.getElementById('submitBtn');
+      if(sb) sb.addEventListener('click',submitForm);
+    })();
 
-    async function loadDetail() {
-      const id = getIdFromUrl();
-      if (!id) { showError(); return; }
-      document.getElementById('breadcrumbBar').innerHTML = `
-        <a href="/">首页</a><span>/</span>
-        <a href="/#hospital-section">医院推荐</a><span>/</span>
-        <span id="crumb-title">医院详情</span>
-      `;
+    // ===== 动态模式检测：若后台开启 DYNAMIC_MODE，加载 app.js 覆盖静态实现，并拉真实医院数据 =====
+    if (localStorage.getItem('DYNAMIC_MODE') === '1') {
+      window.__DYNAMIC_MODE__ = true;
+      (function(){
+        var qi=document.getElementById('questionInput');
+        var sb=document.querySelector('.chat-input .send-btn');
+        if(qi) qi.disabled=false;
+        if(sb) sb.disabled=false;
+      })();
+      (function(){
+        var s=document.createElement('script');
+        s.src='/js/app.js';
+        s.onload=function(){
+          try{ if(typeof loadAllSections==='function') loadAllSections(); }catch(err){ console.warn(err); }
+          if(typeof window.loadHospitalDetailDynamic === 'function') window.loadHospitalDetailDynamic();
+        };
+        document.body.appendChild(s);
+      })();
+      (function () {
+        var TAG_CLASS = { red: 't-blue', blue: 't-blue', green: 't-blue', orange: 't-blue', purple: 't-blue', pink: 't-blue', cyan: 't-blue', yellow: 't-blue' };
 
-      try {
-        const [detailR, listR] = await Promise.all([
-          fetch('/api/articles/full/' + id).then(r => r.json()),
-          fetch('/api/articles?section=hospital').then(r => r.json())
-        ]);
-        if (!detailR.success) { showError(detailR.message); return; }
-        const a = detailR.data;
-
-        if (a.section !== 'hospital') {
-          location.href = '/article/' + id;
-          return;
+        function getIdFromUrl() {
+          var m = location.pathname.match(/\/hospital\/(\d+)/);
+          return m ? Number(m[1]) : null;
+        }
+        function escapeHtml(s) {
+          if (s === null || s === undefined) return '';
+          return String(s).replace(/[&<>"']/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]; });
+        }
+        function formatDate(d) {
+          if (!d) return '';
+          var dt = new Date(d);
+          if (isNaN(dt)) return String(d).substring(0, 10);
+          return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0') + '-' + String(dt.getDate()).padStart(2, '0');
+        }
+        function showError(title, text) {
+          var eb = document.getElementById('errorBox');
+          eb.style.display = 'block';
+          document.getElementById('breadcrumbBar').style.display = 'none';
+          document.getElementById('errorTitle').textContent = title || '404 医院信息不存在';
+          document.getElementById('errorText').textContent = text || '该医院信息可能已被删除或您访问的链接有误。';
+          document.getElementById('mainArea').style.display = 'none';
         }
 
-        document.title = a.title + ' - 全民生殖健康普及网';
-        document.getElementById('crumb-title').textContent = a.title;
+        async function loadDetail() {
+          var id = getIdFromUrl();
+          if (!id) { showError(); return; }
+          document.getElementById('breadcrumbBar').innerHTML =
+            '<a href="/">首页</a><span>/</span><a href="/#hospital-section">医院推荐</a><span>/</span><span id="crumb-title">医院详情</span>';
+          try {
+            var res = await Promise.all([
+              fetch('/api/articles/full/' + id).then(function (r) { return r.json(); }),
+              fetch('/api/articles?section=hospital').then(function (r) { return r.json(); })
+            ]);
+            var detailR = res[0], listR = res[1];
+            if (!detailR.success) { showError(detailR.message); return; }
+            var a = detailR.data;
+            if (a.section !== 'hospital') {
+              location.href = '/article/' + id;
+              return;
+            }
+            document.title = a.title + ' - 全民生殖健康普及网';
+            document.getElementById('crumb-title').textContent = a.title;
 
-        const tagCls = TAG_CLASS[a.tag_color] || 't-blue';
-        const tags = (a.extra_tags || '').split(/[,，]/).map(s=>s.trim()).filter(Boolean);
-        const related = (listR.data || []).filter(x => x.id !== a.id).slice(0, 8);
+            var tagCls = TAG_CLASS[a.tag_color] || 't-blue';
+            var tags = (a.extra_tags || '').split(/[,，]/).map(function (s) { return s.trim(); }).filter(Boolean);
+            var related = (listR.data || []).filter(function (x) { return x.id !== a.id; }).slice(0, 8);
 
-        const heroImg = a.image_url
-          ? `<img class="detail-hero-img" src="${escapeHtml(a.image_url)}" alt="${escapeHtml(a.title)}" onerror="this.style.display='none'">`
-          : '';
-        const summaryBox = a.summary
-          ? `<div class="detail-summary-box">💡 ${escapeHtml(a.summary)}</div>`
-          : '';
+            var heroImg = a.image_url
+              ? '<img class="detail-hero-img" src="' + escapeHtml(a.image_url) + '" alt="' + escapeHtml(a.title) + '" onerror="this.style.display=\'none\'">'
+              : '';
+            var summaryBox = a.summary
+              ? '<div class="detail-summary-box">💡 ' + escapeHtml(a.summary) + '</div>'
+              : '';
+            var infoTable =
+              '<div class="info-table-wrap"><table class="info-table"><tbody>' +
+                '<tr><td>医院名称</td><td>' + escapeHtml(a.title) + '</td></tr>' +
+                (a.level ? '<tr><td>医院等级</td><td>' + escapeHtml(a.level) + '</td></tr>' : '') +
+                (a.location ? '<tr><td>所在地址</td><td>📍 ' + escapeHtml(a.location) + '</td></tr>' : '') +
+                (tags.length ? '<tr><td>特色标签</td><td>' + tags.map(function (t) { return '<span class="s-tag">' + escapeHtml(t) + '</span>'; }).join('') + '</td></tr>' : '') +
+              '</tbody></table></div>';
 
-        const infoTable = `<div class="info-table-wrap"><table class="info-table"><tbody>
-          <tr><td>医院名称</td><td>${escapeHtml(a.title)}</td></tr>
-          ${a.level ? `<tr><td>医院等级</td><td>${escapeHtml(a.level)}</td></tr>` : ''}
-          ${a.location ? `<tr><td>所在地址</td><td>📍 ${escapeHtml(a.location)}</td></tr>` : ''}
-          ${tags.length ? `<tr><td>特色标签</td><td>${tags.map(t=>`<span class="s-tag">${escapeHtml(t)}</span>`).join('')}</td></tr>` : ''}
-        </tbody></table></div>`;
+            var sideCard1 = tags.length
+              ? '<div class="side-card side-tag-group"><h4>🏷 相关标签</h4>' + tags.map(function (t) { return '<span class="s-tag">' + escapeHtml(t) + '</span>'; }).join('') + '</div>'
+              : '';
+            var sideCard2 = related.length
+              ? '<div class="side-card"><h4>🏥 更多医院推荐</h4><ul class="related-list">' + related.map(function (r) { return '<li><a href="/hospital/' + r.id + '">' + escapeHtml(r.title) + '</a></li>'; }).join('') + '</ul></div>'
+              : '';
 
-        const sideCard1 = tags.length ? `
-          <div class="side-card side-tag-group">
-            <h4>🏷 相关标签</h4>
-            ${tags.map(t => `<span class="s-tag">${escapeHtml(t)}</span>`).join('')}
-          </div>` : '';
-        const sideCard2 = related.length ? `
-          <div class="side-card">
-            <h4>🏥 更多医院推荐</h4>
-            <ul class="related-list">
-              ${related.map(r => `<li><a href="/hospital/${r.id}">${escapeHtml(r.title)}</a></li>`).join('')}
-            </ul>
-          </div>` : '';
-
-        document.getElementById('mainArea').innerHTML = `
-          <div class="detail-wrapper">
-            <article class="detail-main">
-              ${a.tag_label ? `<span class="detail-tag ${tagCls}">${escapeHtml(a.tag_label)}</span>` : ''}
-              <h1 class="detail-title">${escapeHtml(a.title)}</h1>
-              <div class="detail-meta">
-                ${a.level ? `<span>🏅 等级：${escapeHtml(a.level)}</span>` : ''}
-                ${a.location ? `<span>📍 地址：${escapeHtml(a.location)}</span>` : ''}
-                <span>📅 更新时间：${formatDate(a.updated_at)}</span>
-              </div>
-              ${heroImg}
-              ${summaryBox}
-              ${infoTable}
-              <div class="detail-body">${a.content || '<p style="color:#888;">暂无详细介绍</p>'}</div>
-            </article>
-            <aside>
-              ${sideCard1}${sideCard2}
-            </aside>
-          </div>
-        `;
-      } catch (e) {
-        console.error(e);
-        showError('加载失败', '请刷新页面或稍后再试：' + (e.message || ''));
-      }
+            document.getElementById('mainArea').innerHTML =
+              '<div class="detail-wrapper">' +
+                '<article class="detail-main">' +
+                  (a.tag_label ? '<span class="detail-tag ' + tagCls + '">' + escapeHtml(a.tag_label) + '</span>' : '') +
+                  '<h1 class="detail-title">' + escapeHtml(a.title) + '</h1>' +
+                  '<div class="detail-meta">' +
+                    (a.level ? '<span>🏅 等级：' + escapeHtml(a.level) + '</span>' : '') +
+                    (a.location ? '<span>📍 地址：' + escapeHtml(a.location) + '</span>' : '') +
+                    '<span>📅 更新时间：' + formatDate(a.updated_at) + '</span>' +
+                  '</div>' +
+                  heroImg + summaryBox + infoTable +
+                  '<div class="detail-body">' + (a.content || '<p style="color:#888;">暂无详细介绍</p>') + '</div>' +
+                '</article>' +
+                '<aside>' + sideCard1 + sideCard2 + '</aside>' +
+              '</div>';
+          } catch (e) {
+            console.error(e);
+            showError('加载失败', '请刷新页面或稍后再试：' + (e.message || ''));
+          }
+        }
+        window.loadHospitalDetailDynamic = loadDetail;
+      })();
     }
-
-    loadDetail();
   </script>
 </body>
 </html>
