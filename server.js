@@ -444,6 +444,36 @@ app.get('/admin-articles', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'admin-articles.html'));
 });
 
+const buildStaticScript = path.join(__dirname, 'scripts', 'build-static.js');
+const DIST_DIR = path.join(__dirname, 'dist');
+app.use('/dist', express.static(DIST_DIR));
+let buildInProgress = false;
+let lastBuildResult = null;
+app.get('/api/build-static', async (req, res) => {
+  if (buildInProgress) {
+    return res.json({ success: false, message: '正在构建中，请稍后再试...' });
+  }
+  buildInProgress = true;
+  lastBuildResult = null;
+  const logs = [];
+  const captureLog = (...args) => logs.push(args.map(x => typeof x === 'string' ? x : (x && x.message || JSON.stringify(x))).join(' '));
+  try {
+    const buildFn = require(buildStaticScript);
+    const result = await buildFn({ log: captureLog });
+    lastBuildResult = result;
+    buildInProgress = false;
+    res.json({ success: true, logs: logs, result: {
+      count: result.count, files: result.files.slice(0, 10), dist: result.dist, total: result.files.length
+    }});
+  } catch (e) {
+    buildInProgress = false;
+    res.json({ success: false, message: String(e && e.message || e), logs: logs });
+  }
+});
+app.get('/api/build-status', (req, res) => {
+  res.json({ success: true, building: buildInProgress, last: lastBuildResult });
+});
+
 function tryListen(app, port, maxTries = 20) {
   return new Promise((resolve, reject) => {
     let tryPort = port;

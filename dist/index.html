@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>全民生殖健康普及网</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <h1>全民生殖健康普及网</h1>
+        <p class="slogan">普及生殖健康知识 守护家庭幸福</p>
+      </div>
+      <button class="consult-btn" onclick="openConsultModal()">
+        <span class="icon">💬</span>
+        <span>交流咨询</span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="nav-bar">
+    <div class="nav-content">
+      <a href="#hot-section" class="nav-item active">精彩内容</a>
+      <a href="#knowledge-section" class="nav-item">知识普及</a>
+      <a href="#hospital-section" class="nav-item">医院推荐</a>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <section id="hot-section" class="section">
+      <div class="section-header">
+        <h2 class="section-title"><span class="title-bar"></span>精彩内容</h2>
+        <p class="section-desc">科学普及生殖健康知识 关爱您的生育健康</p>
+      </div>
+
+      <div class="hot-topics" id="hotTopics"><a href="article-2.html" class="topic-card big-card"><img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=pregnancy%20planning%20medical%20consultation%20couple%20hospital%20professional&amp;image_size=square_hd" alt="科学备孕指南：孕前准备、饮食调理、生活习惯全攻略" onerror="this.style.background='#e3f2fd'">
+        <div class="topic-overlay">
+          <span class="hot-tag" style="background:#357abd;">备孕</span>
+          <h3>科学备孕指南：孕前准备、饮食调理、生活习惯全攻略</h3><p>孕前3-6个月开始调理，夫妻双方共同准备，提高受孕几率。</p>
+        </div></a><a href="article-3.html" class="topic-card"><img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=infertility%20medical%20clinic%20doctor%20consultation%20professional%20hospital&amp;image_size=square_hd" alt="不孕不育的常见原因与科学治疗方案解读" onerror="this.style.background='#e3f2fd'">
+      <div class="topic-info">
+        <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#1976d2;background:#e3f2fd;margin-right:10px;">不孕不育</span>
+        <h4>不孕不育的常见原因与科学治疗方案解读</h4><p class="meta">男女双方因素各占约40%，不明原因约20%，建议夫妻同诊同治。</p>
+      </div></a><a href="article-1.html" class="topic-card"><img src="/uploads/FIX_OK.png" alt="【修复验证】文章已成功更新-OK" onerror="this.style.background='#e3f2fd'">
+      <div class="topic-info">
+        <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#1976d2;background:#e3f2fd;margin-right:10px;">新标签OK</span>
+        <h4>【修复验证】文章已成功更新-OK</h4><p class="meta">摘要更新成功啦！</p>
+      </div></a><a href="article-4.html" class="topic-card"><img src="/uploads/img_1786518786598_4d7fa1176072d2a6aa1eba78.jpg" alt="女性最佳生育年龄是多少？高龄备孕注意事项" onerror="this.style.background='#e3f2fd'">
+      <div class="topic-info">
+        <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#c2185b;background:#e3f2fd;margin-right:10px;">备孕</span>
+        <h4>女性最佳生育年龄是多少？高龄备孕注意事项</h4><p class="meta">25-29岁为最佳生育年龄，35岁后卵巢功能逐渐下降。</p>
+      </div></a><a href="article-12.html" class="topic-card"><img src="" alt="生殖医学中心" onerror="this.style.background='#e3f2fd'">
+      <div class="topic-info">
+        <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#c2185b;background:#e3f2fd;margin-right:10px;">????</span>
+        <h4>生殖医学中心</h4><p class="meta">试管婴儿、人工授精、不孕不育诊疗、胚胎培养技术</p>
+      </div></a></div>
+        </a>
+        <a href="article-2.html" class="topic-card">
+          <img src="" alt="科学备孕指南" onerror="this.style.background='#e3f2fd'">
+          <div class="topic-info">
+            <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#1976d2;background:#e3f2fd;margin-right:10px;">备孕</span>
+            <h4>科学备孕指南：孕前准备、饮食调理、生活习惯全攻略</h4>
+            <p class="meta">孕前3-6个月开始调理，夫妻双方共同准备，提高受孕几率。</p>
+          </div>
+        </a>
+        <a href="article-3.html" class="topic-card">
+          <img src="" alt="不孕不育的常见原因" onerror="this.style.background='#e3f2fd'">
+          <div class="topic-info">
+            <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#1976d2;background:#e3f2fd;margin-right:10px;">不孕不育</span>
+            <h4>不孕不育的常见原因与科学治疗方案解读</h4>
+            <p class="meta">男女双方因素各占约40%，不明原因约20%，建议夫妻同诊同治。</p>
+          </div>
+        </a>
+        <a href="article-10.html" class="topic-card">
+          <img src="" alt="女性最佳生育年龄" onerror="this.style.background='#e3f2fd'">
+          <div class="topic-info">
+            <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#1976d2;background:#e3f2fd;margin-right:10px;">备孕</span>
+            <h4>女性最佳生育年龄是多少？高龄备孕注意事项</h4>
+            <p class="meta">发布时间 2026-08-08</p>
+          </div>
+        </a>
+        <a href="article-11.html" class="topic-card">
+          <img src="" alt="精子质量差怎么办" onerror="this.style.background='#e3f2fd'">
+          <div class="topic-info">
+            <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#1976d2;background:#e3f2fd;margin-right:10px;">男性健康</span>
+            <h4>精子质量差怎么办？提高精子活力的方法</h4>
+            <p class="meta">发布时间 2026-08-07</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section id="knowledge-section" class="section">
+      <div class="section-header">
+        <h2 class="section-title"><span class="title-bar"></span>知识普及</h2>
+        <p class="section-desc">全面的生殖健康科普 助您科学备孕</p>
+      </div>
+
+      <div class="article-list" style="border-top:none;padding-top:0;">
+        <ul class="article-items" id="articleList"><li class="article-item">
+      <a href="article-12.html">
+        <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#c2185b;background:#e3f2fd;margin-right:10px;">????</span>
+        <span class="article-title">生殖医学中心</span>
+        <span class="article-date">试管婴儿、人工授精、不孕不育诊疗、胚胎培养技术</span>
+      </a></li><li class="article-item">
+      <a href="article-13.html">
+        <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#1976d2;background:#e3f2fd;margin-right:10px;">????</span>
+        <span class="article-title">男科</span>
+        <span class="article-date">男性不育症、少弱精症、精索静脉曲张、性功能障碍</span>
+      </a></li><li class="article-item">
+      <a href="article-14.html">
+        <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#2e7d32;background:#e3f2fd;margin-right:10px;">?</span>
+        <span class="article-title">妇科</span>
+        <span class="article-date">子宫肌瘤、卵巢囊肿、子宫内膜异位症、妇科炎症</span>
+      </a></li><li class="article-item">
+      <a href="article-15.html">
+        <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#ef6c00;background:#e3f2fd;margin-right:10px;">?</span>
+        <span class="article-title">内分泌科</span>
+        <span class="article-date">多囊卵巢、月经不调、排卵障碍、甲状腺疾病</span>
+      </a></li><li class="article-item">
+      <a href="article-16.html">
+        <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#7b1fa2;background:#e3f2fd;margin-right:10px;">?</span>
+        <span class="article-title">中医科</span>
+        <span class="article-date">中医调理备孕、调经助孕、胎停育调理、体质调养</span>
+      </a></li><li class="article-item">
+      <a href="article-17.html">
+        <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#e53935;background:#e3f2fd;margin-right:10px;">?</span>
+        <span class="article-title">遗传咨询科</span>
+        <span class="article-date">染色体检查、遗传病筛查、产前诊断、优生咨询</span>
+      </a></li><li class="article-item">
+      <a href="article-18.html">
+        <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#00838f;background:#e3f2fd;margin-right:10px;">?</span>
+        <span class="article-title">检验科</span>
+        <span class="article-date">精液分析、激素六项、染色体检测、免疫抗体检查</span>
+      </a></li><li class="article-item">
+      <a href="article-19.html">
+        <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#f9a825;background:#e3f2fd;margin-right:10px;">??</span>
+        <span class="article-title">产前诊断中心</span>
+        <span class="article-date">唐氏筛查、无创DNA、羊水穿刺、超声排畸检查</span>
+      </a></li><li class="article-item">
+      <a href="article-5.html">
+        <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#1976d2;background:#e3f2fd;margin-right:10px;">男性健康</span>
+        <span class="article-title">精子质量差怎么办？提高精子活力的方法</span>
+        <span class="article-date">戒烟戒酒、避免久坐、适度运动、补充锌硒。</span>
+      </a></li><li class="article-item">
+      <a href="article-13.html">
+        <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#1976d2;background:#e3f2fd;margin-right:10px;">????</span>
+        <span class="article-title">男科</span>
+        <span class="article-date">男性不育症、少弱精症、精索静脉曲张、性功能障碍</span>
+      </a></li><li class="article-item">
+      <a href="article-6.html">
+        <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#2e7d32;background:#e3f2fd;margin-right:10px;">妇科</span>
+        <span class="article-title">多囊卵巢综合征能自然怀孕吗？治疗方法介绍</span>
+        <span class="article-date">通过生活方式调整+促排卵治疗，约70%患者可成功受孕。</span>
+      </a></li><li class="article-item">
+      <a href="article-14.html">
+        <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#2e7d32;background:#e3f2fd;margin-right:10px;">?</span>
+        <span class="article-title">妇科</span>
+        <span class="article-date">子宫肌瘤、卵巢囊肿、子宫内膜异位症、妇科炎症</span>
+      </a></li><li class="article-item">
+      <a href="article-7.html">
+        <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#ef6c00;background:#e3f2fd;margin-right:10px;">输卵管</span>
+        <span class="article-title">输卵管堵塞的症状有哪些？检查方法详解</span>
+        <span class="article-date">输卵管造影是目前最常用的检查方法，准确率高。</span>
+      </a></li><li class="article-item">
+      <a href="article-15.html">
+        <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#ef6c00;background:#e3f2fd;margin-right:10px;">?</span>
+        <span class="article-title">内分泌科</span>
+        <span class="article-date">多囊卵巢、月经不调、排卵障碍、甲状腺疾病</span>
+      </a></li><li class="article-item">
+      <a href="article-8.html">
+        <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#7b1fa2;background:#e3f2fd;margin-right:10px;">人工授精</span>
+        <span class="article-title">人工授精和试管婴儿的区别 适应症对比</span>
+        <span class="article-date">人工授精主要解决男性因素，试管针对更复杂不孕情况。</span>
+      </a></li><li class="article-item">
+      <a href="article-16.html">
+        <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#7b1fa2;background:#e3f2fd;margin-right:10px;">?</span>
+        <span class="article-title">中医科</span>
+        <span class="article-date">中医调理备孕、调经助孕、胎停育调理、体质调养</span>
+      </a></li><li class="article-item">
+      <a href="article-9.html">
+        <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#c2185b;background:#e3f2fd;margin-right:10px;">孕期</span>
+        <span class="article-title">孕期产检时间表 各个阶段检查项目汇总</span>
+        <span class="article-date">12周建档、16周唐筛、24周四维、32周胎心监护。</span>
+      </a></li><li class="article-item">
+      <a href="article-17.html">
+        <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#e53935;background:#e3f2fd;margin-right:10px;">?</span>
+        <span class="article-title">遗传咨询科</span>
+        <span class="article-date">染色体检查、遗传病筛查、产前诊断、优生咨询</span>
+      </a></li><li class="article-item">
+      <a href="article-10.html">
+        <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#1976d2;background:#e3f2fd;margin-right:10px;">内分泌</span>
+        <span class="article-title">月经不调影响怀孕吗？调经助孕的方法</span>
+        <span class="article-date">月经不调常伴随排卵异常，需先明确病因再调经。</span>
+      </a></li><li class="article-item">
+      <a href="article-18.html">
+        <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#00838f;background:#e3f2fd;margin-right:10px;">?</span>
+        <span class="article-title">检验科</span>
+        <span class="article-date">精液分析、激素六项、染色体检测、免疫抗体检查</span>
+      </a></li><li class="article-item">
+      <a href="article-11.html">
+        <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#2e7d32;background:#e3f2fd;margin-right:10px;">优生优育</span>
+        <span class="article-title">孕前检查项目清单 男女双方检查大全</span>
+        <span class="article-date">建议孕前3-6个月完成全部检查项目。</span>
+      </a></li><li class="article-item">
+      <a href="article-19.html">
+        <span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#f9a825;background:#e3f2fd;margin-right:10px;">??</span>
+        <span class="article-title">产前诊断中心</span>
+        <span class="article-date">唐氏筛查、无创DNA、羊水穿刺、超声排畸检查</span>
+      </a></li></ul>
+      </div>
+    </section>
+
+    <section id="hospital-section" class="section">
+      <div class="section-header">
+        <h2 class="section-title"><span class="title-bar"></span>医院推荐</h2>
+        <p class="section-desc">全国优质生殖医院 值得信赖的专业医疗机构</p>
+      </div>
+
+      <div class="hospital-grid" id="hospitalGrid"><a href="hospital-20.html" class="hospital-card">
+      <div class="hospital-img">
+        <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=beijing%20union%20medical%20college%20hospital%20exterior%20modern&amp;image_size=landscape_4_3" alt="北京协和医院生殖医学中心" onerror="this.style.background='#e3f2fd'">
+        <span class="hospital-level" style="background:rgba(53,122,189,0.95);">三级甲等</span>
+      </div>
+      <div class="hospital-info">
+        <h3>北京协和医院生殖医学中心</h3>
+        <p class="hospital-loc">📍 北京市东城区</p>
+        <div class="hospital-tags"><span>国家重点学科</span><span>试管成功率高</span></div>
+      </div>
+    </a><a href="hospital-21.html" class="hospital-card">
+      <div class="hospital-img">
+        <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=peking%20university%20third%20hospital%20modern%20medical%20center&amp;image_size=landscape_4_3" alt="北京大学第三医院生殖医学中心" onerror="this.style.background='#e3f2fd'">
+        <span class="hospital-level" style="background:rgba(53,122,189,0.95);">三级甲等</span>
+      </div>
+      <div class="hospital-info">
+        <h3>北京大学第三医院生殖医学中心</h3>
+        <p class="hospital-loc">📍 北京市海淀区</p>
+        <div class="hospital-tags"><span>中国大陆首例试管</span><span>国际先进水平</span></div>
+      </div>
+    </a><a href="hospital-22.html" class="hospital-card">
+      <div class="hospital-img">
+        <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=shanghai%20ruijin%20hospital%20modern%20building%20medical&amp;image_size=landscape_4_3" alt="上海瑞金医院生殖医学中心" onerror="this.style.background='#e3f2fd'">
+        <span class="hospital-level" style="background:rgba(53,122,189,0.95);">三级甲等</span>
+      </div>
+      <div class="hospital-info">
+        <h3>上海瑞金医院生殖医学中心</h3>
+        <p class="hospital-loc">📍 上海市黄浦区</p>
+        <div class="hospital-tags"><span>综合实力强</span><span>专家团队</span></div>
+      </div>
+    </a><a href="hospital-23.html" class="hospital-card">
+      <div class="hospital-img">
+        <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=guangzhou%20sun%20yat-sen%20university%20hospital%20medical&amp;image_size=landscape_4_3" alt="广州中山一院生殖医学中心" onerror="this.style.background='#e3f2fd'">
+        <span class="hospital-level" style="background:rgba(53,122,189,0.95);">三级甲等</span>
+      </div>
+      <div class="hospital-info">
+        <h3>广州中山一院生殖医学中心</h3>
+        <p class="hospital-loc">📍 广州市越秀区</p>
+        <div class="hospital-tags"><span>华南地区领先</span><span>技术精湛</span></div>
+      </div>
+    </a><a href="hospital-24.html" class="hospital-card">
+      <div class="hospital-img">
+        <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=chengdu%20huaxi%20second%20hospital%20modern%20womens%20hospital&amp;image_size=landscape_4_3" alt="华西第二医院生殖医学中心" onerror="this.style.background='#e3f2fd'">
+        <span class="hospital-level" style="background:rgba(53,122,189,0.95);">三级甲等</span>
+      </div>
+      <div class="hospital-info">
+        <h3>华西第二医院生殖医学中心</h3>
+        <p class="hospital-loc">📍 成都市锦江区</p>
+        <div class="hospital-tags"><span>西南地区首选</span><span>学科齐全</span></div>
+      </div>
+    </a><a href="hospital-25.html" class="hospital-card">
+      <div class="hospital-img">
+        <img src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=zhejiang%20university%20womens%20hospital%20modern%20medical&amp;image_size=landscape_4_3" alt="浙江大学医学院附属妇产科医院" onerror="this.style.background='#e3f2fd'">
+        <span class="hospital-level" style="background:rgba(53,122,189,0.95);">三级甲等</span>
+      </div>
+      <div class="hospital-info">
+        <h3>浙江大学医学院附属妇产科医院</h3>
+        <p class="hospital-loc">📍 杭州市上城区</p>
+        <div class="hospital-tags"><span>华东地区知名</span><span>服务优质</span></div>
+      </div>
+    </a></div>
+          <div class="hospital-info">
+            <h3>北京协和医院生殖医学中心</h3>
+            <p class="hospital-loc">📍 北京市东城区</p>
+            <div class="hospital-tags">
+              <span>国家重点学科</span><span>试管成功率高</span>
+            </div>
+          </div>
+        </a>
+        <a href="hospital-61.html" class="hospital-card">
+          <div class="hospital-img">
+            <img src="" alt="北京大学第三医院生殖医学中心" onerror="this.style.background='#e3f2fd'">
+            <span class="hospital-level" style="background:rgba(53,122,189,0.95);">三级甲等</span>
+          </div>
+          <div class="hospital-info">
+            <h3>北京大学第三医院生殖医学中心</h3>
+            <p class="hospital-loc">📍 北京市海淀区</p>
+            <div class="hospital-tags">
+              <span>中国大陆首例试管</span><span>国际先进水平</span>
+            </div>
+          </div>
+        </a>
+        <a href="hospital-62.html" class="hospital-card">
+          <div class="hospital-img">
+            <img src="" alt="上海瑞金医院生殖医学中心" onerror="this.style.background='#e3f2fd'">
+            <span class="hospital-level" style="background:rgba(53,122,189,0.95);">三级甲等</span>
+          </div>
+          <div class="hospital-info">
+            <h3>上海瑞金医院生殖医学中心</h3>
+            <p class="hospital-loc">📍 上海市黄浦区</p>
+            <div class="hospital-tags">
+              <span>综合实力强</span><span>专家团队</span>
+            </div>
+          </div>
+        </a>
+        <a href="hospital-63.html" class="hospital-card">
+          <div class="hospital-img">
+            <img src="" alt="广州中山一院生殖医学中心" onerror="this.style.background='#e3f2fd'">
+            <span class="hospital-level" style="background:rgba(53,122,189,0.95);">三级甲等</span>
+          </div>
+          <div class="hospital-info">
+            <h3>广州中山一院生殖医学中心</h3>
+            <p class="hospital-loc">📍 广州市越秀区</p>
+            <div class="hospital-tags">
+              <span>华南地区领先</span><span>技术精湛</span>
+            </div>
+          </div>
+        </a>
+        <a href="hospital-64.html" class="hospital-card">
+          <div class="hospital-img">
+            <img src="" alt="华西第二医院生殖医学中心" onerror="this.style.background='#e3f2fd'">
+            <span class="hospital-level" style="background:rgba(53,122,189,0.95);">三级甲等</span>
+          </div>
+          <div class="hospital-info">
+            <h3>华西第二医院生殖医学中心</h3>
+            <p class="hospital-loc">📍 成都市锦江区</p>
+            <div class="hospital-tags">
+              <span>西南地区首选</span><span>学科齐全</span>
+            </div>
+          </div>
+        </a>
+        <a href="hospital-65.html" class="hospital-card">
+          <div class="hospital-img">
+            <img src="" alt="浙江大学医学院附属妇产科医院" onerror="this.style.background='#e3f2fd'">
+            <span class="hospital-level" style="background:rgba(53,122,189,0.95);">三级甲等</span>
+          </div>
+          <div class="hospital-info">
+            <h3>浙江大学医学院附属妇产科医院</h3>
+            <p class="hospital-loc">📍 杭州市上城区</p>
+            <div class="hospital-tags">
+              <span>华东地区知名</span><span>服务优质</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>关于我们</h4>
+        <p>全民生殖健康普及网致力于推广科学的生殖健康知识，为广大群众提供专业的健康咨询服务。</p>
+      </div>
+      <div class="footer-section">
+        <h4>友情链接</h4>
+        <ul>
+          <li><a href="#">国家卫生健康委员会</a></li>
+          <li><a href="#">中国妇幼保健协会</a></li>
+          <li><a href="#">中华医学会</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>联系我们</h4>
+        <p>服务热线：400-888-8888</p>
+        <p>邮箱：service@reprohealth.com</p>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>© 2026 全民生殖健康普及网 版权所有</p>
+    </div>
+  </footer>
+
+  <div id="consultModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>💬 生殖健康在线咨询</h2>
+        <button class="close-btn" onclick="closeConsultModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="chat-container">
+          <div id="chatMessages" class="chat-messages">
+            <div class="message bot-message">
+              <div class="avatar">🏥</div>
+              <div class="message-content">
+                <p>您好！欢迎咨询生殖健康相关问题。可前往文章管理后台启用「动态数据模式」后体验智能问答功能。</p>
+                <p>常见问题：<br>• 备孕注意事项<br>• 不孕不育原因<br>• 试管婴儿流程<br>• 多囊卵巢治疗<br>• 男性精子质量</p>
+              </div>
+            </div>
+          </div>
+          <div class="chat-input">
+            <input type="text" id="questionInput" placeholder="启用动态模式后可发送问题..." disabled onkeypress="handleKeyPress(event)">
+            <button onclick="sendQuestion()" class="send-btn" disabled>发送</button>
+          </div>
+        </div>
+        <div class="form-section">
+          <div class="form-header">
+            <h3>📝 预约登记</h3>
+            <p>填写以下信息，专业人员将尽快与您联系</p>
+          </div>
+          <form id="customerForm" class="customer-form" onsubmit="submitForm(event)">
+            <div class="form-group">
+              <label for="formName">姓名 *</label>
+              <input type="text" id="formName" name="name" placeholder="请输入您的姓名" required>
+            </div>
+            <div class="form-group">
+              <label>性别 *</label>
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input type="radio" name="formGender" value="男" required>
+                  <span>男</span>
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="formGender" value="女">
+                  <span>女</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="formPhone">电话 *</label>
+              <input type="tel" id="formPhone" name="phone" placeholder="请输入您的手机号码" required>
+            </div>
+            <button type="submit" id="submitBtn" class="submit-btn">提交预约</button>
+          </form>
+          <div id="formMsg" class="form-message"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a id="consult-top" style="display:block;height:0;overflow:hidden;"></a>
+
+  <script>
+    // ===== 基础 UI 交互（静态模式保留） =====
+    function openConsultModal(){
+      document.getElementById('consultModal').classList.add('active');
+      document.body.style.overflow='hidden';
+    }
+    function closeConsultModal(){
+      document.getElementById('consultModal').classList.remove('active');
+      document.body.style.overflow='';
+    }
+    document.getElementById('consultModal').addEventListener('click',function(e){
+      if(e.target===this) closeConsultModal();
+    });
+    document.addEventListener('keydown',function(e){
+      if(e.key==='Escape') closeConsultModal();
+    });
+    document.querySelectorAll('a.nav-item, a[href^="#"]').forEach(function(a){
+      a.addEventListener('click',function(e){
+        var href=this.getAttribute('href')||'';
+        if(!href.startsWith('#')) return;
+        var tgt=document.querySelector(href);
+        if(!tgt) return;
+        e.preventDefault();
+        tgt.scrollIntoView({behavior:'smooth',block:'start'});
+        document.querySelectorAll('a.nav-item').forEach(function(n){n.classList.remove('active')});
+        document.querySelectorAll('a.nav-item[href="'+href+'"]').forEach(function(n){n.classList.add('active')});
+      });
+    });
+    window.addEventListener('scroll',function(){
+      var fromTop=window.scrollY+80;
+      var ids=['hot-section','knowledge-section','hospital-section'];
+      var cur=ids[0];
+      for(var i=0;i<ids.length;i++){
+        var sec=document.getElementById(ids[i]);
+        if(sec && sec.offsetTop<=fromTop) cur=ids[i];
+      }
+      document.querySelectorAll('a.nav-item').forEach(function(n){
+        n.classList.toggle('active', n.getAttribute('href')==='#'+cur);
+      });
+    });
+
+    function handleKeyPress(e){
+      if(e.key==='Enter'){e.preventDefault();sendQuestion();}
+    }
+    function sendQuestion(){/* 动态模式下由 app.js 覆盖实现 */}
+    function submitForm(e){
+      if(e&&e.preventDefault) e.preventDefault();
+      var name=document.getElementById('formName').value.trim();
+      var gender=document.querySelector('input[name="formGender"]:checked');
+      var phone=document.getElementById('formPhone').value.trim();
+      var msg=document.getElementById('formMsg');
+      msg.style.display='block';
+      msg.style.color='#e53935';
+      if(!name){msg.textContent='请填写姓名';return;}
+      if(!gender){msg.textContent='请选择性别';return;}
+      if(!/^1[3-9]\d{9}$/.test(phone)){msg.textContent='请填写正确的11位手机号';return;}
+      if(!window.__DYNAMIC_MODE__){
+        msg.textContent='当前为静态模式，可前往 /admin-articles 启用动态数据后提交。';
+        return;
+      }
+      msg.textContent='正在提交...';
+      /* 动态模式下由 app.js 处理 */
+      return false;
+    }
+    var _sb=document.getElementById('submitBtn');
+    if(_sb) _sb.addEventListener('click',submitForm);
+
+    // ===== 后台开关检测：若开启动态模式，则加载 app.js 覆盖静态内容 =====
+    if(localStorage.getItem('DYNAMIC_MODE')==='1'){
+      window.__DYNAMIC_MODE__=true;
+      var s=document.createElement('script');
+      s.src='js/app.js';
+      s.onload=function(){
+        document.getElementById('questionInput').disabled=false;
+        document.querySelector('.send-btn').disabled=false;
+        loadAllSections();
+      };
+      document.body.appendChild(s);
+    }
+  </script>
+</body>
+</html>
