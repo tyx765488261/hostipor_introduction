@@ -32,6 +32,16 @@ app.use(express.json({ limit: '20mb' }));
 app.use(express.urlencoded({ extended: true, limit: '20mb' }));
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 0 }));
 
+// 兜底：HTTP 模式下如果请求 /article-N.html 或 /hospital-N.html，
+// 但 public/ 目录里已经删除了这些静态副本（用户要求「只保留 dist 下」），
+// 就自动重定向到动态路由 /article/:id 或 /hospital/:id，避免 404
+app.get(/^\/article-(\d+)\.html$/i, (req, res) => {
+  res.redirect(302, '/article/' + req.params[0]);
+});
+app.get(/^\/hospital-(\d+)\.html$/i, (req, res) => {
+  res.redirect(302, '/hospital/' + req.params[0]);
+});
+
 const ALLOWED_EXT = { '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.gif': 'image/gif', '.webp': 'image/webp', '.bmp': 'image/bmp' };
 let upload = null;
 if (multer) {
@@ -289,11 +299,15 @@ app.delete('/api/articles/:id', async (req, res) => {
 });
 
 app.get('/article/:id', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'article.html'));
+  const html = fs.readFileSync(path.join(__dirname, 'public', 'article.html'), 'utf8')
+    .replace(/(href|src)="(css|js|uploads)\//g, '$1="/$2/');
+  res.type('html').send(html);
 });
 
 app.get('/hospital/:id', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'hospital.html'));
+  const html = fs.readFileSync(path.join(__dirname, 'public', 'hospital.html'), 'utf8')
+    .replace(/(href|src)="(css|js|uploads)\//g, '$1="/$2/');
+  res.type('html').send(html);
 });
 
 app.get('/api/articles/full/:id', async (req, res) => {
@@ -306,7 +320,7 @@ app.get('/api/articles/full/:id', async (req, res) => {
       const SECTION_AUTO = {
         hot: genHotDetail(data),
         department: genDeptDetail(data),
-        hospital: genHospitalDetail(data)
+        hospital: genHospitalFullDetail(data)
       };
       data.content = SECTION_AUTO[data.section] || data.summary || '暂无详细介绍。';
     }
@@ -358,6 +372,92 @@ function genDeptDetail(a) {
 <p>建议就诊前整理好既往病史、检查报告、用药清单；如需做性激素类检查请于月经第 2~4 天（空腹）到场；如为初次就诊建议夫妻双方同来。</p>
 <p style="text-align:right;color:#999;margin-top:30px;">—— 信息来源：${name} 官方公开资料整理</p>`;
 }
+function genHospitalFullDetail(a) {
+  const tagList = (a.extra_tags || '').split(/[,，]/).map(s=>s.trim()).filter(Boolean);
+  const tagsText = tagList.length ? tagList.join('、') : '生殖专科特色';
+  const loc = a.location || '';
+  const lvl = a.level || '正规医疗机构';
+  const name = a.title || '本中心';
+  const intro1 = a.summary || (name + '是' + lvl + '级别的专业医疗机构，在' + tagsText + '方面具有较高的专业水平和临床经验，为患者提供规范、安全、专业的诊疗服务。');
+  const strengths =
+    '<p>中心在生殖医学与不孕不育诊疗领域具备以下突出优势，尤其擅长以下几类复杂疑难病例的诊治：</p>' +
+    '<ul>' +
+      '<li>👩‍⚕️ <b>高龄与卵巢低反应助孕</b>：擅长 35 岁以上高龄女性、反复促排卵失败、卵巢储备功能下降（DOR）患者的个体化方案设计，累计为大量高龄家庭成功助孕。</li>' +
+      '<li>🔬 <b>反复胚胎着床失败（RIF）</b>：建立子宫内膜容受性评估、宫腔镜排查、免疫因素筛查、胚胎筛选的综合诊治路径，显著提高反复失败患者的最终妊娠率。</li>' +
+      '<li>💊 <b>复发性流产（RSA）精准保胎</b>：多学科联合（生殖免疫、妇科内分泌、遗传、男科），建立病因分型→个体化干预→孕后全程管理的闭环方案，显著降低再次流产风险。</li>' +
+      '<li>🧬 <b>遗传咨询与第三代试管（PGT）</b>：对染色体易位、单基因遗传病、高龄非整倍体筛查等病例提供专业遗传咨询，联合 PGT-A / PGT-M / PGT-SR 技术阻断出生缺陷。</li>' +
+      '<li>👨‍⚕️ <b>男性不育显微手术</b>：擅长梗阻性无精症的显微输精管吻合、附睾/睾丸取精（micro-TESE），以及精索静脉曲张显微结扎等男科高难度手术，让部分「无精症」患者实现自然受孕或试管助孕。</li>' +
+      '<li>🩺 <b>生殖微创与妇科内镜</b>：大量开展宫腹腔镜联合手术处理输卵管积水、宫腔粘连、子宫内膜息肉、子宫纵隔、卵巢巧克力囊肿等影响怀孕的器质性病变，创伤小、恢复快、妊娠率高。</li>' +
+      '<li>⚖️ <b>多囊卵巢综合征（PCOS）综合管理</b>：减重 + 内分泌调节 + 诱导排卵 + 试管的分步管理方案，对顽固性不排卵、胰岛素抵抗的 PCOS 患者效果显著。</li>' +
+      '<li>🧠 <b>生殖心理与全流程关怀</b>：重视患者心理疏导，配备专业心理咨询与健康管理师，提供从首诊、促排、取卵、移植到孕 12 周的全周期陪伴式服务。</li>' +
+    '</ul>';
+  const experts =
+    '<p>中心拥有一支结构合理、经验丰富的专家团队：</p>' +
+    '<ul>' +
+      '<li>由主任医师 / 教授、副主任医师、主治医师、胚胎学家、遗传咨询师、生殖护理师组成的多学科团队；</li>' +
+      '<li>核心专家均具备 15–30 年以上临床经验，多名专家担任全国及省级生殖医学专业委员会委员；</li>' +
+      '<li>博士 / 硕士学历占比高，梯队完整，年门诊量、取卵周期数、移植周期数均处于地区或全国领先水平；</li>' +
+      '<li>与国内外知名生殖中心保持长期学术交流，定期参加 ASRM / ESHRE 等国际会议，技术理念与国际前沿同步。</li>' +
+    '</ul>' +
+    '<p>中心高度重视规范化诊治，严格遵循《人类辅助生殖技术规范》及行业最新指南，坚持「以患者为中心，循证医学为依据」，个体化评估每一对夫妻的病情，制定最合适的助孕方案，避免过度医疗和不必要的花费。</p>';
+  const labs =
+    '<p>辅助生殖的成功率与实验室水平、胚胎培养环境高度相关。中心配备高标准的胚胎实验室和系列先进设备：</p>' +
+    '<ul>' +
+      '<li>✅ <b>层流净化胚胎实验室</b>：恒温恒湿、空气洁净度达百级标准，最大限度降低胚胎培养过程的环境风险；</li>' +
+      '<li>✅ <b>时差成像培养系统（Time-lapse）</b>：24 小时不间断动态观察胚胎发育，无需频繁开箱观察，减少胚胎应激，更精准筛选高潜能胚胎；</li>' +
+      '<li>✅ <b>ICSI 显微操作系统</b>：顶级倒置显微镜 + 显微操作臂，精准完成单精子注射、胚胎辅助孵化、活检等精细操作；</li>' +
+      '<li>✅ <b>PGT 检测平台</b>：配备 NGS（下一代测序）设备，联合专业遗传诊断实验室，完成胚胎植入前的染色体 / 基因检测；</li>' +
+      '<li>✅ <b>精子处理与冷冻系统</b>：专业密度梯度离心、上游法优选精子；程序降温仪 + 气相液氮罐，保证精子、卵子、胚胎的长期安全冷冻保存；</li>' +
+      '<li>✅ <b>超声监测设备</b>：高端彩色多普勒超声，配合 3D / 4D 探头，精准评估窦卵泡计数、子宫内膜容受性、血流参数等关键指标；</li>' +
+      '<li>✅ <b>信息化全流程追溯</b>：条码身份核对 + 双人复核 + 电子病历系统，确保患者、配子、胚胎的身份 100% 准确，杜绝差错。</li>' +
+    '</ul>';
+  return (
+    '<h2>医院简介</h2>' +
+    '<p>' + escapeHtml(intro1) + '</p>' +
+    '<p>中心集医疗、教学、科研于一体，致力于为患者提供一站式生殖健康诊疗服务，涵盖从孕前检查、辅助生殖技术、生殖内分泌疾病诊疗到术后随访和保胎管理的全流程，帮助更多家庭实现生育愿望。</p>' +
+    '<h3>特色诊疗项目</h3>' +
+    '<ul>' +
+      '<li>试管婴儿技术（第一代 IVF / 第二代 ICSI / 第三代 PGT）</li>' +
+      '<li>夫精人工授精（AIH）、供精人工授精（AID）及相关咨询</li>' +
+      '<li>女性不孕：输卵管堵塞、多囊卵巢综合征、子宫内膜异位症、排卵障碍等</li>' +
+      '<li>男性不育：少弱精症、无精症、精索静脉曲张、性功能障碍等</li>' +
+      '<li>复发性流产（RSA）精准诊断与个体化保胎</li>' +
+      '<li>生殖内分泌疾病：月经不调、闭经、高泌乳素血症、早发性卵巢功能不全</li>' +
+      '<li>生殖微创手术（宫腹腔镜联合、输卵管疏通、卵巢囊肿剔除等）</li>' +
+      (tagList.length ? '<li>特色方向：' + escapeHtml(tagList.join('、')) + '</li>' : '') +
+    '</ul>' +
+    '<h3>专科优势与擅长领域</h3>' + strengths +
+    '<h3>专家团队与技术实力</h3>' + experts +
+    '<h3>先进设备与实验室保障</h3>' + labs +
+    '<h3>挂号与就医须知</h3>' +
+    '<ul>' +
+      '<li>就诊前请通过医院官方 APP / 微信公众号 / 官方电话提前预约挂号，避免空跑</li>' +
+      '<li>首次就诊建议夫妻双方同来；男方如需精液检查，请禁欲 3–7 天</li>' +
+      '<li>携带好身份证、医保卡、既往病历、检查报告（尤其是近半年的）</li>' +
+      '<li>抽血、激素六项、AMH、B 超监测排卵等检查，请遵医嘱提前准备（部分需空腹）</li>' +
+      '<li>进入辅助生殖周期后，请严格按医嘱复诊时间用药和检查，切勿自行停药</li>' +
+      '<li>异地就医患者建议提前了解医保报销政策，并保留好发票、诊断证明、费用清单</li>' +
+    '</ul>' +
+    '<h3>联系与交通指引</h3>' +
+    '<table style="width:100%;border-collapse:collapse;margin:10px 0;"><tbody>' +
+      (loc ? '<tr><td style="width:25%;padding:8px 12px;border:1px solid #e3f0fb;background:#f5faff;font-weight:bold;">所在地址</td><td style="padding:8px 12px;border:1px solid #e3f0fb;">📍 ' + escapeHtml(loc) + '</td></tr>' : '') +
+      '<tr><td style="padding:8px 12px;border:1px solid #e3f0fb;background:#f5faff;font-weight:bold;">门诊时间</td><td style="padding:8px 12px;border:1px solid #e3f0fb;">🕘 周一至周五 8:00–17:00；周六 8:00–12:00（节假日以官方公告为准）</td></tr>' +
+      '<tr><td style="padding:8px 12px;border:1px solid #e3f0fb;background:#f5faff;font-weight:bold;">挂号方式</td><td style="padding:8px 12px;border:1px solid #e3f0fb;">📱 医院官方 APP / 微信公众号 / 电话预约 / 现场自助机（推荐线上预约）</td></tr>' +
+      '<tr><td style="padding:8px 12px;border:1px solid #e3f0fb;background:#f5faff;font-weight:bold;">咨询电话</td><td style="padding:8px 12px;border:1px solid #e3f0fb;">📞 请通过医院官方公布的热线或在线客服查询获取</td></tr>' +
+    '</tbody></table>' +
+    '<h3>温馨提示</h3>' +
+    '<p>知名专家号源一般比较紧张，建议提前 1–2 周通过官方渠道预约；预约成功后请提前 30 分钟到院报到；如临时改约请至少提前 1 天操作，避免浪费宝贵号源。</p>' +
+    '<h3>免责声明</h3>' +
+    '<p>本站提供的本医院信息（含地址、门诊时间、诊疗项目等）均从公开资料整理，仅供就医参考指引，不作为诊疗依据；具体科室排班、挂号规则、费用与治疗方案，请以医院官方最新公告和面诊医生意见为准。</p>' +
+    '<p style="text-align:right;color:#999;margin-top:30px;">—— 全民生殖健康普及网 · 医院推荐</p>'
+  );
+}
+function escapeHtml(str) {
+  return String(str == null ? '' : str)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
 function genHospitalDetail(a) {
   const name = a.title || '医院';
   const level = a.level || '';
@@ -441,7 +541,9 @@ app.get('/admin', async (req, res) => {
 });
 
 app.get('/admin-articles', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'admin-articles.html'));
+  const html = fs.readFileSync(path.join(__dirname, 'public', 'admin-articles.html'), 'utf8')
+    .replace(/(href|src)="(css|js|uploads)\//g, '$1="/$2/');
+  res.type('html').send(html);
 });
 
 const buildStaticScript = path.join(__dirname, 'scripts', 'build-static.js');

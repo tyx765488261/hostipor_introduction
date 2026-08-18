@@ -89,39 +89,64 @@ function renderHospitalSection(list) {
 // ============= 加载所有版块 =============
 async function loadAllSections() {
   if (location.protocol === 'file:') return;
+  var hotBox=document.getElementById('hotTopics'), artBox=document.getElementById('articleList'), hospBox=document.getElementById('hospitalGrid');
+  if (!hotBox && !artBox && !hospBox) return;
   try {
     const [hot, hosp] = await Promise.all([
       fetch('/api/articles?section=hot').then(r => r.json()),
       fetch('/api/articles?section=hospital').then(r => r.json()),
     ]);
-    if (hot.success) renderHotSection(hot.data);
-    if (hosp.success) renderHospitalSection(hosp.data);
+    if (hot.success && hotBox) renderHotSection(hot.data);
+    if (hosp.success && hospBox) renderHospitalSection(hosp.data);
+    // hospital section 数据也用于知识普及区（若存在 articleList）
+    if (artBox && hot.success) {
+      const list = (hot.data || []).filter(function(x){return x.section==='department' || x.sub_type==='article'});
+      const listHtml = list.map(function(a){
+        const tagCls = TAG_COLOR_STYLE[a.tag_color] || 'color:#1976d2;';
+        const meta = (a.summary && a.summary.length < 50) ? a.summary : (fmtDate(a.updated_at || a.created_at) || '');
+        return `<li class="article-item">
+          <a href="${A(a.id)}">
+            ${a.tag_label ? `<span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;${tagCls}background:#e3f2fd;margin-right:10px;">${esc(a.tag_label)}</span>` : ''}
+            <span class="article-title">${esc(a.title)}</span>
+            <span class="article-date">${esc(meta)}</span>
+          </a></li>`;
+      }).join('') || `<li class="article-item" style="color:#aaa;text-align:center;justify-content:center;">暂无文章</li>`;
+      artBox.innerHTML = listHtml;
+    }
   } catch (e) {
     console.error('加载版块失败', e);
-    ['hotTopics','articleList','hospitalGrid'].forEach(id => {
-      document.getElementById(id).innerHTML = `<div style="color:#e53935;padding:20px;text-align:center;">数据加载失败，请检查 MySQL 和文章管理后台 <a href="${adminLink}" style="color:#357abd;">${adminLink}</a></div>`;
+    [{el:hotBox,id:'hotTopics'},{el:artBox,id:'articleList'},{el:hospBox,id:'hospitalGrid'}].forEach(function(x){
+      if(x.el) x.el.innerHTML = `<div style="color:#e53935;padding:20px;text-align:center;">数据加载失败，请检查 MySQL 和文章管理后台 <a href="${adminLink}" style="color:#357abd;">${adminLink}</a></div>`;
     });
   }
 }
 
 // ============= 咨询弹窗 =============
 function openConsultModal() {
-  document.getElementById('consultModal').classList.add('active');
+  var el=document.getElementById('consultModal');
+  if(!el) return;
+  el.classList.add('active');
   document.body.style.overflow = 'hidden';
 }
 function closeConsultModal() {
-  document.getElementById('consultModal').classList.remove('active');
+  var el=document.getElementById('consultModal');
+  if(!el) return;
+  el.classList.remove('active');
   document.body.style.overflow = '';
 }
-document.getElementById('consultModal').addEventListener('click', function(e) {
-  if (e.target === this) closeConsultModal();
-});
+(function(){
+  var m=document.getElementById('consultModal');
+  if(m) m.addEventListener('click', function(e) {
+    if (e.target === this) closeConsultModal();
+  });
+})();
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeConsultModal();
 });
 
 function addMessage(text, isUser) {
   const chatMessages = document.getElementById('chatMessages');
+  if (!chatMessages) return;
   const messageDiv = document.createElement('div');
   messageDiv.className = 'message ' + (isUser ? 'user-message' : 'bot-message');
   const avatar = document.createElement('div');
@@ -137,6 +162,7 @@ function addMessage(text, isUser) {
 }
 function addLoadingMessage() {
   const chatMessages = document.getElementById('chatMessages');
+  if (!chatMessages) return;
   const messageDiv = document.createElement('div');
   messageDiv.className = 'message bot-message loading-msg';
   messageDiv.id = 'loadingMsg';
@@ -157,7 +183,8 @@ function removeLoadingMessage() {
 }
 async function sendQuestion() {
   const input = document.getElementById('questionInput');
-  const sendBtn = document.querySelector('.send-btn');
+  const sendBtn = document.querySelector('.chat-input .send-btn');
+  if (!input || !sendBtn) return;
   const question = input.value.trim();
   if (!question) return;
   addMessage(question, true);
@@ -199,11 +226,14 @@ async function submitForm(e) {
   return submitAppointment();
 }
 async function submitAppointment() {
-  const name = document.getElementById('formName').value.trim();
+  const nameEl = document.getElementById('formName');
+  const phoneEl = document.getElementById('formPhone');
   const gender = document.querySelector('input[name="formGender"]:checked');
-  const phone = document.getElementById('formPhone').value.trim();
   const submitBtn = document.getElementById('submitBtn');
   const msg = document.getElementById('formMsg');
+  if (!nameEl || !phoneEl || !submitBtn || !msg) return;
+  const name = nameEl.value.trim();
+  const phone = phoneEl.value.trim();
 
   msg.style.display = 'none';
   if (!name) return showFormMsg('请填写姓名', true);
@@ -225,9 +255,9 @@ async function submitAppointment() {
     const r = await res.json();
     if (r.success) {
       showFormMsg('✅ 预约信息提交成功！我们将尽快与您联系。', false);
-      document.getElementById('formName').value = '';
-      document.getElementById('formPhone').value = '';
-      document.querySelectorAll('input[name="formGender"]').forEach(i => i.checked = false);
+      nameEl.value = '';
+      phoneEl.value = '';
+      document.querySelectorAll('input[name="formGender"]').forEach(function (r) { r.checked = false; });
       setTimeout(() => { msg.style.display = 'none'; closeConsultModal(); }, 2200);
     } else {
       showFormMsg(r.message || '提交失败', true);

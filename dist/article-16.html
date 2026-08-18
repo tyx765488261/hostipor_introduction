@@ -7,30 +7,6 @@
   <link rel="stylesheet" href="css/style.css">
   <style>
     body { background: #f5f8fc; }
-    .page-header {
-      background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
-      color: white;
-      padding: 14px 40px;
-      box-shadow: 0 2px 12px rgba(53,122,189,0.2);
-    }
-    .page-header-inner {
-      max-width: 1180px; margin: 0 auto;
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .logo { font-size: 20px; font-weight: 700; letter-spacing: 1px; }
-    .logo a { color: white; text-decoration: none; }
-    .nav-links a {
-      color: white; text-decoration: none; margin-left: 26px; font-size: 14px; opacity: 0.92;
-    }
-    .nav-links a:hover { opacity: 1; text-decoration: underline; }
-    .consult-btn {
-      background: white; color: #357abd; border: none;
-      padding: 8px 20px; border-radius: 22px; font-weight: 600;
-      cursor: pointer; font-size: 14px; margin-left: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-    .consult-btn:hover { transform: translateY(-1px); }
-
     .detail-wrapper {
       max-width: 1180px; margin: 28px auto 50px; padding: 0 20px;
       display: grid; grid-template-columns: 1fr 280px; gap: 28px;
@@ -154,12 +130,26 @@
   </style>
 </head>
 <body>
-  <header class="page-header">
-    <div class="page-header-inner">
-      <div class="logo"><a href="index.html">🏥 全民生殖健康普及网</a></div>
-      <button class="consult-btn" onclick="openConsultModal()">💬 交流咨询</button>
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <h1>全民生殖健康普及网</h1>
+        <p class="slogan">普及生殖健康知识 守护家庭幸福</p>
+      </div>
+      <button class="consult-btn" onclick="openConsultModal()">
+        <span class="icon">💬</span>
+        <span>交流咨询</span>
+      </button>
     </div>
   </header>
+
+  <nav class="nav-bar">
+    <div class="nav-content">
+      <a href="index.html#hot-section" class="nav-item active">精彩内容</a>
+      <a href="index.html#knowledge-section" class="nav-item">知识普及</a>
+      <a href="index.html#hospital-section" class="nav-item">医院推荐</a>
+    </div>
+  </nav>
 
   <div id="breadcrumbBar" class="breadcrumb">
     <a href="index.html">首页</a><span>/</span>
@@ -206,53 +196,7 @@
           <li><a href="article-12.html">生殖医学中心</a></li><li><a href="article-13.html">男科</a></li><li><a href="article-14.html">妇科</a></li><li><a href="article-15.html">内分泌科</a></li><li><a href="article-17.html">遗传咨询科</a></li><li><a href="article-18.html">检验科</a></li><li><a href="article-19.html">产前诊断中心</a></li>
         </ul></div>
       </aside>
-    </div></span>
-        <h1 class="detail-title">试管婴儿技术全解析：从检查到成功怀孕的完整流程</h1>
-        <div class="detail-meta">
-          <span>📅 发布时间：2026-08-01</span>
-          <span>🔄 更新时间：2026-08-01</span>
-          <span style="color:#357abd;">🔥 热门推荐</span>
-        </div>
-        <img class="detail-hero-img" src="" alt="中医科" style="background:#e3f2fd;">
-        <div class="detail-summary-box">💡 中医调理备孕、调经助孕、胎停育调理、体质调养</div>
-
-        <div class="detail-body">
-          <h2>概述</h2>
-          <p>全面了解试管婴儿的适应症、治疗流程、费用及成功率，帮助您做出明智的选择。</p>
-          <h3>一、常见问题解答</h3>
-          <ul>
-            <li><strong>什么人群需要关注？</strong> 建议备孕夫妻、有相关症状或家族史的人群定期进行相关筛查。</li>
-            <li><strong>需要做哪些检查？</strong> 常规包括激素六项、超声检查、输卵管评估（女方）、精液常规（男方）等，具体遵医嘱。</li>
-            <li><strong>一般治疗周期？</strong> 因人而异，多数在 3~12 个月内可获得明确诊断和阶段性结果。</li>
-          </ul>
-          <h3>二、生活方式建议</h3>
-          <p>合理膳食，均衡摄入优质蛋白、蔬果、谷物；戒烟限酒，避免熬夜；保持适度有氧运动，每周 3~5 次，每次 30 分钟以上；保持良好心态，避免过度焦虑。</p>
-          <h3>三、就医提示</h3>
-          <p>本文为健康科普，不能替代专业医生的诊断与治疗。如有相关症状或备孕超过 1 年未孕（高龄 6 个月），请尽早到正规医院生殖医学中心就诊，做到早发现、早干预、早治疗。</p>
-          <p style="text-align:right;color:#999;margin-top:30px;">—— 全民生殖健康普及网 科普专栏</p>
-        </div>
-      </article>
-      <aside>
-        <div class="side-card side-tag-group">
-          <h4>🏷 相关标签</h4>
-          <span class="s-tag">备孕</span><span class="s-tag">试管婴儿</span><span class="s-tag">不孕不育</span>
-        </div>
-        <div class="side-card">
-          <h4>🔗 相关推荐</h4>
-          <ul class="related-list">
-            <li><a href="article-2.html">科学备孕指南：孕前准备、饮食调理、生活习惯全攻略</a></li>
-            <li><a href="article-3.html">不孕不育的常见原因与科学治疗方案解读</a></li>
-            <li><a href="article-10.html">女性最佳生育年龄是多少？高龄备孕注意事项</a></li>
-            <li><a href="article-11.html">精子质量差怎么办？提高精子活力的方法</a></li>
-            <li><a href="article-12.html">多囊卵巢综合征能自然怀孕吗？治疗方法介绍</a></li>
-            <li><a href="article-14.html">人工授精和试管婴儿的区别 适应症对比</a></li>
-            <li><a href="article-30.html">生殖医学中心 · 试管婴儿、人工授精、不孕不育诊疗</a></li>
-            <li><a href="article-17.html">孕前检查项目清单 男女双方检查大全</a></li>
-          </ul>
-        </div>
-      </aside>
-    </div>
-  </div>
+    </div></div>
 
   <div id="errorBox" style="display:none;">
     <h2 id="errorTitle">404 文章不存在</h2>
@@ -260,7 +204,7 @@
     <p><a href="index.html">← 返回首页</a></p>
   </div>
 
-  <div id="consultModal" class="modal">
+  <div id="consultModal" class="modal" style="display:none;">
     <div class="modal-content">
       <div class="modal-header">
         <h2>💬 生殖健康在线咨询</h2>
@@ -346,11 +290,17 @@
   <script>
     // ===== 首页同款：交流咨询 Modal 基础交互（静态模式保留） =====
     function openConsultModal(){
-      document.getElementById('consultModal').classList.add('active');
+      var cm=document.getElementById('consultModal');
+      if(!cm) return;
+      cm.classList.add('active');
+      cm.style.display='flex';
       document.body.style.overflow='hidden';
     }
     function closeConsultModal(){
-      document.getElementById('consultModal').classList.remove('active');
+      var cm=document.getElementById('consultModal');
+      if(!cm) return;
+      cm.classList.remove('active');
+      cm.style.display='none';
       document.body.style.overflow='';
     }
     (function(){
@@ -401,8 +351,10 @@
         var s=document.createElement('script');
         s.src='js/app.js';
         s.onload=function(){
-          try{ if(typeof loadAllSections==='function') loadAllSections(); }catch(err){ console.warn(err); }
-          loadArticleDetailDynamic();
+          if(typeof window.loadArticleDetailDynamic === 'function') window.loadArticleDetailDynamic();
+        };
+        s.onerror=function(){
+          if(typeof window.loadArticleDetailDynamic === 'function') window.loadArticleDetailDynamic();
         };
         document.body.appendChild(s);
       })();
@@ -411,8 +363,8 @@
         var TAG_CLASS = { red: 't-blue', blue: 't-blue', green: 't-blue', orange: 't-blue', purple: 't-blue', pink: 't-blue', cyan: 't-blue', yellow: 't-blue' };
 
         function getIdFromUrl() {
-          var m = location.pathname.match(/\/article\/(\d+)/);
-          return m ? Number(m[1]) : null;
+          var m = location.pathname.match(/(?:\/article\/(\d+)|(?:^|[\\\/])article-(\d+)\.html$)/i);
+          return m ? Number(m[1] || m[2]) : null;
         }
         function escapeHtml(s) {
           if (s === null || s === undefined) return '';
@@ -425,6 +377,7 @@
           return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0') + '-' + String(dt.getDate()).padStart(2, '0');
         }
         function showError(title, text) {
+          if (!window.__DYNAMIC_MODE__ || location.protocol === 'file:') return;
           var eb = document.getElementById('errorBox');
           eb.style.display = 'block';
           document.getElementById('breadcrumbBar').style.display = 'none';
@@ -434,6 +387,7 @@
         }
 
         async function loadDetail() {
+          if (!window.__DYNAMIC_MODE__ || location.protocol === 'file:') return;
           var id = getIdFromUrl();
           if (!id) { showError(); return; }
           if (location.protocol === 'file:') return;

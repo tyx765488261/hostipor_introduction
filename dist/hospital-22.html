@@ -7,30 +7,6 @@
   <link rel="stylesheet" href="css/style.css">
   <style>
     body { background: #f5f8fc; }
-    .page-header {
-      background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
-      color: white;
-      padding: 14px 40px;
-      box-shadow: 0 2px 12px rgba(53,122,189,0.2);
-    }
-    .page-header-inner {
-      max-width: 1180px; margin: 0 auto;
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .logo { font-size: 20px; font-weight: 700; letter-spacing: 1px; }
-    .logo a { color: white; text-decoration: none; }
-    .nav-links a {
-      color: white; text-decoration: none; margin-left: 26px; font-size: 14px; opacity: 0.92;
-    }
-    .nav-links a:hover { opacity: 1; text-decoration: underline; }
-    .consult-btn {
-      background: white; color: #357abd; border: none;
-      padding: 8px 20px; border-radius: 22px; font-weight: 600;
-      cursor: pointer; font-size: 14px; margin-left: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-    .consult-btn:hover { transform: translateY(-1px); }
-
     .detail-wrapper {
       max-width: 1180px; margin: 28px auto 50px; padding: 0 20px;
       display: grid; grid-template-columns: 1fr 280px; gap: 28px;
@@ -53,6 +29,7 @@
       border-radius: 4px; font-size: 12px; color: white;
       margin-bottom: 14px;
     }
+    .detail-tag:empty { display: none; }
     .t-red,.t-blue,.t-green,.t-orange,.t-purple,.t-pink,.t-cyan,.t-yellow{background:#4a90e2;color:#fff;}
     .detail-title {
       font-size: 28px; color: #1f3b5e; font-weight: 700;
@@ -153,12 +130,26 @@
   </style>
 </head>
 <body>
-  <header class="page-header">
-    <div class="page-header-inner">
-      <div class="logo"><a href="index.html">🏥 全民生殖健康普及网</a></div>
-      <button class="consult-btn" onclick="openConsultModal()">💬 交流咨询</button>
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <h1>全民生殖健康普及网</h1>
+        <p class="slogan">普及生殖健康知识 守护家庭幸福</p>
+      </div>
+      <button class="consult-btn" onclick="openConsultModal()">
+        <span class="icon">💬</span>
+        <span>交流咨询</span>
+      </button>
     </div>
   </header>
+
+  <nav class="nav-bar">
+    <div class="nav-content">
+      <a href="index.html#hot-section" class="nav-item">精彩内容</a>
+      <a href="index.html#knowledge-section" class="nav-item">知识普及</a>
+      <a href="index.html#hospital-section" class="nav-item active">医院推荐</a>
+    </div>
+  </nav>
 
   <div id="breadcrumbBar" class="breadcrumb">
     <a href="index.html">首页</a><span>/</span>
@@ -169,13 +160,14 @@
   <div id="mainArea">
     <div class="detail-wrapper">
       <article class="detail-main">
+        <span class="detail-tag t-blue"></span>
         <h1 class="detail-title">上海瑞金医院生殖医学中心</h1>
         <div class="detail-meta">
           <span>🏅 等级：三级甲等</span>
           <span>📍 地址：上海市黄浦区</span>
           <span>📅 更新时间：2026-08-11</span>
         </div>
-        <img class="detail-hero-img" src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=shanghai%20ruijin%20hospital%20modern%20building%20medical&amp;image_size=landscape_4_3" alt="上海瑞金医院生殖医学中心" onerror="this.style.background='#e3f2fd'">
+        <img class="detail-hero-img" src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=shanghai%20ruijin%20hospital%20modern%20building%20medical&amp;image_size=landscape_4_3" alt="上海瑞金医院生殖医学中心" onerror="this.onerror=null;this.src='';this.style.background='#e3f2fd';">
         <div class="detail-summary-box">💡 上海交通大学医学院附属，综合实力雄厚</div>
         <div class="info-table-wrap"><table class="info-table"><tbody>
     <tr><td>医院名称</td><td>上海瑞金医院生殖医学中心</td></tr>
@@ -184,24 +176,72 @@
     <tr><td>特色标签</td><td><span class="s-tag">综合实力强</span><span class="s-tag">专家团队</span></td></tr>
   </tbody></table></div>
         <div class="detail-body">
-    <h2>上海瑞金医院生殖医学中心 · 三级甲等</h2>
+    <h2>医院简介</h2>
     <p>上海交通大学医学院附属，综合实力雄厚</p>
-    <h3>基本信息</h3>
-    <table style="width:100%;border-collapse:collapse;margin:10px 0;"><tbody>
-      <tr><td style="width:25%;padding:8px 12px;border:1px solid #e3f0fb;background:#f5faff;font-weight:bold;">医院名称</td><td style="padding:8px 12px;border:1px solid #e3f0fb;">上海瑞金医院生殖医学中心</td></tr>
-      <tr><td style="padding:8px 12px;border:1px solid #e3f0fb;background:#f5faff;font-weight:bold;">医院等级</td><td style="padding:8px 12px;border:1px solid #e3f0fb;">三级甲等</td></tr>
-      <tr><td style="padding:8px 12px;border:1px solid #e3f0fb;background:#f5faff;font-weight:bold;">所在地址</td><td style="padding:8px 12px;border:1px solid #e3f0fb;">上海市黄浦区</td></tr>
-      <tr><td style="padding:8px 12px;border:1px solid #e3f0fb;background:#f5faff;font-weight:bold;">特色标签</td><td style="padding:8px 12px;border:1px solid #e3f0fb;">综合实力强、专家团队</td></tr>
-    </tbody></table>
-    <h3>就医前须知</h3>
+    <p>中心集医疗、教学、科研为一体，致力于为患者提供一站式生殖健康诊疗服务，涵盖从孕前检查、辅助生殖技术、生殖内分泌疾病诊疗到术后随访和保胎管理的全流程，帮助更多家庭实现生育愿望。</p>
+    <h3>特色诊疗项目</h3>
     <ul>
-      <li>就诊前请提前通过官方渠道预约挂号，避免空跑</li>
-      <li>携带好身份证、医保卡、既往病历和检查报告</li>
-      <li>如需做抽血、激素检查请提前按医嘱空腹</li>
-      <li>异地就医患者建议提前了解医保报销政策</li>
+      <li>试管婴儿技术（第一代 IVF / 第二代 ICSI / 第三代 PGT）</li>
+      <li>夫精人工授精（AIH）、供精人工授精（AID）及相关咨询</li>
+      <li>女性不孕：输卵管堵塞、多囊卵巢综合征、子宫内膜异位症、排卵障碍等</li>
+      <li>男性不育：少弱精症、无精症、精索静脉曲张、性功能障碍等</li>
+      <li>复发性流产（RSA）精准诊断与个体化保胎</li>
+      <li>生殖内分泌疾病：月经不调、闭经、高泌乳素血症、早发性卵巢功能不全</li>
+      <li>生殖微创手术（宫腹腔镜联合、输卵管疏通、卵巢囊肿剔除等）</li>
+      <li>特色方向：综合实力强、专家团队</li>
     </ul>
+    <h3>专科优势与擅长领域</h3>
+    <p>中心在生殖医学与不孕不育诊疗领域具备以下突出优势，尤其擅长以下几类复杂疑难病例的诊治：</p>
+    <ul>
+      <li>👩‍⚕️ <b>高龄与卵巢低反应助孕</b>：擅长 35 岁以上高龄女性、反复促排卵失败、卵巢储备功能下降（DOR）患者的个体化方案设计，累计为大量高龄家庭成功助孕。</li>
+      <li>🔬 <b>反复胚胎着床失败（RIF）</b>：建立子宫内膜容受性评估、宫腔镜排查、免疫因素筛查、胚胎筛选的综合诊治路径，显著提高反复失败患者的最终妊娠率。</li>
+      <li>💊 <b>复发性流产（RSA）精准保胎</b>：多学科联合（生殖免疫、妇科内分泌、遗传、男科），建立病因分型→个体化干预→孕后全程管理的闭环方案，显著降低再次流产风险。</li>
+      <li>🧬 <b>遗传咨询与第三代试管（PGT）</b>：对染色体易位、单基因遗传病、高龄非整倍体筛查等病例提供专业遗传咨询，联合 PGT-A / PGT-M / PGT-SR 技术阻断出生缺陷。</li>
+      <li>👨‍⚕️ <b>男性不育显微手术</b>：擅长梗阻性无精症的显微输精管吻合、附睾/睾丸取精（micro-TESE），以及精索静脉曲张显微结扎等男科高难度手术，让部分「无精症」患者实现自然受孕或试管助孕。</li>
+      <li>🩺 <b>生殖微创与妇科内镜</b>：大量开展宫腹腔镜联合手术处理输卵管积水、宫腔粘连、子宫内膜息肉、子宫纵隔、卵巢巧克力囊肿等影响怀孕的器质性病变，创伤小、恢复快、妊娠率高。</li>
+      <li>⚖️ <b>多囊卵巢综合征（PCOS）综合管理</b>：减重 + 内分泌调节 + 诱导排卵 + 试管的分步管理方案，对顽固性不排卵、胰岛素抵抗的 PCOS 患者效果显著。</li>
+      <li>🧠 <b>生殖心理与全流程关怀</b>：重视患者心理疏导，配备专业心理咨询与健康管理师，提供从首诊、促排、取卵、移植到孕 12 周的全周期陪伴式服务。</li>
+    </ul>
+    <h3>专家团队与技术实力</h3>
+    <p>中心拥有一支结构合理、经验丰富的专家团队：</p>
+    <ul>
+      <li>由主任医师 / 教授、副主任医师、主治医师、胚胎学家、遗传咨询师、生殖护理师组成的多学科团队；</li>
+      <li>核心专家均具备 15–30 年以上临床经验，多名专家担任全国及省级生殖医学专业委员会委员；</li>
+      <li>博士 / 硕士学历占比高，梯队完整，年门诊量、取卵周期数、移植周期数均处于地区或全国领先水平；</li>
+      <li>与国内外知名生殖中心保持长期学术交流，定期参加 ASRM / ESHRE 等国际会议，技术理念与国际前沿同步。</li>
+    </ul>
+    <p>中心高度重视规范化诊治，严格遵循《人类辅助生殖技术规范》及行业最新指南，坚持「以患者为中心，循证医学为依据」，个体化评估每一对夫妻的病情，制定最合适的助孕方案，避免过度医疗和不必要的花费。</p>
+    <h3>先进设备与实验室保障</h3>
+    <p>辅助生殖的成功率与实验室水平、胚胎培养环境高度相关。中心配备高标准的胚胎实验室和系列先进设备：</p>
+    <ul>
+      <li>✅ <b>层流净化胚胎实验室</b>：恒温恒湿、空气洁净度达百级标准，最大限度降低胚胎培养过程的环境风险；</li>
+      <li>✅ <b>时差成像培养系统（Time-lapse）</b>：24 小时不间断动态观察胚胎发育，无需频繁开箱观察，减少胚胎应激，更精准筛选高潜能胚胎；</li>
+      <li>✅ <b>ICSI 显微操作系统</b>：顶级倒置显微镜 + 显微操作臂，精准完成单精子注射、胚胎辅助孵化、活检等精细操作；</li>
+      <li>✅ <b>PGT 检测平台</b>：配备 NGS（下一代测序）设备，联合专业遗传诊断实验室，完成胚胎植入前的染色体 / 基因检测；</li>
+      <li>✅ <b>精子处理与冷冻系统</b>：专业密度梯度离心、上游法优选精子；程序降温仪 + 气相液氮罐，保证精子、卵子、胚胎的长期安全冷冻保存；</li>
+      <li>✅ <b>超声监测设备</b>：高端彩色多普勒超声，配合 3D / 4D 探头，精准评估窦卵泡计数、子宫内膜容受性、血流参数等关键指标；</li>
+      <li>✅ <b>信息化全流程追溯</b>：条码身份核对 + 双人复核 + 电子病历系统，确保患者、配子、胚胎的身份 100% 准确，杜绝差错。</li>
+    </ul>
+    <h3>挂号与就医须知</h3>
+    <ul>
+      <li>就诊前请通过医院官方 APP / 微信公众号 / 官方电话提前预约挂号，避免空跑</li>
+      <li>首次就诊建议夫妻双方同来；男方如需精液检查，请禁欲 3–7 天</li>
+      <li>携带好身份证、医保卡、既往病历、检查报告（尤其是近半年的）</li>
+      <li>抽血、激素六项、AMH、B 超监测排卵等检查，请遵医嘱提前准备（部分需空腹）</li>
+      <li>进入辅助生殖周期后，请严格按医嘱复诊时间用药和检查，切勿自行停药</li>
+      <li>异地就医患者建议提前了解医保报销政策，并保留好发票、诊断证明、费用清单</li>
+    </ul>
+    <h3>联系与交通指引</h3>
+    <table style="width:100%;border-collapse:collapse;margin:10px 0;"><tbody>
+      <tr><td style="width:25%;padding:8px 12px;border:1px solid #e3f0fb;background:#f5faff;font-weight:bold;">所在地址</td><td style="padding:8px 12px;border:1px solid #e3f0fb;">📍 上海市黄浦区</td></tr>
+      <tr><td style="padding:8px 12px;border:1px solid #e3f0fb;background:#f5faff;font-weight:bold;">门诊时间</td><td style="padding:8px 12px;border:1px solid #e3f0fb;">🕘 周一至周五 8:00–17:00；周六 8:00–12:00（节假日以官方公告为准）</td></tr>
+      <tr><td style="padding:8px 12px;border:1px solid #e3f0fb;background:#f5faff;font-weight:bold;">挂号方式</td><td style="padding:8px 12px;border:1px solid #e3f0fb;">📱 医院官方 APP / 微信公众号 / 电话预约 / 现场自助机（推荐线上预约）</td></tr>
+      <tr><td style="padding:8px 12px;border:1px solid #e3f0fb;background:#f5faff;font-weight:bold;">咨询电话</td><td style="padding:8px 12px;border:1px solid #e3f0fb;">📞 请通过医院官方公布的热线或在线客服查询获取</td></tr>
+    </tbody></table>
+    <h3>温馨提示</h3>
+    <p>知名专家号源一般比较紧张，建议提前 1–2 周通过官方渠道预约；预约成功后请提前 30 分钟到院报到；如临时改约请至少提前 1 天操作，避免浪费宝贵号源。</p>
     <h3>免责声明</h3>
-    <p>本站提供的医院信息仅供参考就医指引，不作为诊疗依据；具体科室排班、挂号规则、费用等请以医院官方最新公告为准。</p>
+    <p>本站提供的本医院信息（含地址、门诊时间、诊疗项目等）均从公开资料整理，仅供就医参考指引，不作为诊疗依据；具体科室排班、挂号规则、费用与治疗方案，请以医院官方最新公告和面诊医生意见为准。</p>
     <p style="text-align:right;color:#999;margin-top:30px;">—— 全民生殖健康普及网 · 医院推荐</p>
   </div>
       </article>
@@ -211,78 +251,14 @@
           <li><a href="hospital-20.html">北京协和医院生殖医学中心</a></li><li><a href="hospital-21.html">北京大学第三医院生殖医学中心</a></li><li><a href="hospital-23.html">广州中山一院生殖医学中心</a></li><li><a href="hospital-24.html">华西第二医院生殖医学中心</a></li><li><a href="hospital-25.html">浙江大学医学院附属妇产科医院</a></li>
         </ul></div>
       </aside>
-    </div></h1>
-        <div class="detail-meta">
-          <span>🏅 等级：三级甲等</span>
-          <span>📍 地址：北京市东城区</span>
-          <span>📅 更新时间：2026-08-01</span>
-        </div>
-        <img class="detail-hero-img" src="" alt="北京协和医院生殖医学中心" style="background:#e3f2fd;">
-        <div class="detail-summary-box">💡 国家重点学科，国内生殖医学领域权威机构</div>
-
-        <div class="info-table-wrap">
-          <table class="info-table">
-            <tbody>
-              <tr><td>医院名称</td><td>北京协和医院生殖医学中心</td></tr>
-              <tr><td>医院等级</td><td>三级甲等</td></tr>
-              <tr><td>所在地址</td><td>📍 北京市东城区</td></tr>
-              <tr><td>特色标签</td><td>
-                <span class="s-tag">国家重点学科</span>
-                <span class="s-tag">试管成功率高</span>
-              </td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="detail-body">
-          <h2>北京协和医院生殖医学中心 · 三级甲等</h2>
-          <p>国家重点学科，国内生殖医学领域权威机构</p>
-          <h3>基本信息</h3>
-          <table style="width:100%;border-collapse:collapse;margin:10px 0;">
-            <tbody>
-              <tr><td style="width:25%;padding:8px 12px;border:1px solid #e3f0fb;background:#f5faff;font-weight:bold;">医院名称</td><td style="padding:8px 12px;border:1px solid #e3f0fb;">北京协和医院生殖医学中心</td></tr>
-              <tr><td style="padding:8px 12px;border:1px solid #e3f0fb;background:#f5faff;font-weight:bold;">医院等级</td><td style="padding:8px 12px;border:1px solid #e3f0fb;">三级甲等</td></tr>
-              <tr><td style="padding:8px 12px;border:1px solid #e3f0fb;background:#f5faff;font-weight:bold;">所在地址</td><td style="padding:8px 12px;border:1px solid #e3f0fb;">北京市东城区</td></tr>
-              <tr><td style="padding:8px 12px;border:1px solid #e3f0fb;background:#f5faff;font-weight:bold;">特色标签</td><td style="padding:8px 12px;border:1px solid #e3f0fb;">国家重点学科、试管成功率高</td></tr>
-            </tbody>
-          </table>
-          <h3>就医前须知</h3>
-          <ul>
-            <li>就诊前请提前通过官方渠道预约挂号，避免空跑</li>
-            <li>携带好身份证、医保卡、既往病历和检查报告</li>
-            <li>如需做抽血、激素检查请提前按医嘱空腹</li>
-            <li>异地就医患者建议提前了解医保报销政策</li>
-          </ul>
-          <h3>免责声明</h3>
-          <p>本站提供的医院信息仅供参考就医指引，不作为诊疗依据；具体科室排班、挂号规则、费用等请以医院官方最新公告为准。</p>
-          <p style="text-align:right;color:#999;margin-top:30px;">—— 全民生殖健康普及网 · 医院推荐</p>
-        </div>
-      </article>
-      <aside>
-        <div class="side-card side-tag-group">
-          <h4>🏷 相关标签</h4>
-          <span class="s-tag">国家重点学科</span><span class="s-tag">试管成功率高</span><span class="s-tag">三级甲等</span>
-        </div>
-        <div class="side-card">
-          <h4>🏥 更多医院推荐</h4>
-          <ul class="related-list">
-            <li><a href="hospital-61.html">北京大学第三医院生殖医学中心</a></li>
-            <li><a href="hospital-62.html">上海瑞金医院生殖医学中心</a></li>
-            <li><a href="hospital-63.html">广州中山一院生殖医学中心</a></li>
-            <li><a href="hospital-64.html">华西第二医院生殖医学中心</a></li>
-            <li><a href="hospital-65.html">浙江大学医学院附属妇产科医院</a></li>
-          </ul>
-        </div>
-      </aside>
-    </div>
-  </div>
+    </div></div>
   <div id="errorBox" style="display:none;">
     <h2 id="errorTitle">404 医院信息不存在</h2>
     <p id="errorText" style="color:#777;">该医院信息可能已被删除或您访问的链接有误。</p>
     <p><a href="index.html">← 返回首页</a></p>
   </div>
 
-  <div id="consultModal" class="modal">
+  <div id="consultModal" class="modal" style="display:none;">
     <div class="modal-content">
       <div class="modal-header">
         <h2>💬 生殖健康在线咨询</h2>
@@ -368,11 +344,17 @@
   <script>
     // ===== 首页同款：交流咨询 Modal 基础交互（静态模式保留） =====
     function openConsultModal(){
-      document.getElementById('consultModal').classList.add('active');
+      var cm=document.getElementById('consultModal');
+      if(!cm) return;
+      cm.classList.add('active');
+      cm.style.display='flex';
       document.body.style.overflow='hidden';
     }
     function closeConsultModal(){
-      document.getElementById('consultModal').classList.remove('active');
+      var cm=document.getElementById('consultModal');
+      if(!cm) return;
+      cm.classList.remove('active');
+      cm.style.display='none';
       document.body.style.overflow='';
     }
     (function(){
@@ -421,7 +403,9 @@
         var s=document.createElement('script');
         s.src='js/app.js';
         s.onload=function(){
-          try{ if(typeof loadAllSections==='function') loadAllSections(); }catch(err){ console.warn(err); }
+          if(typeof window.loadHospitalDetailDynamic === 'function') window.loadHospitalDetailDynamic();
+        };
+        s.onerror=function(){
           if(typeof window.loadHospitalDetailDynamic === 'function') window.loadHospitalDetailDynamic();
         };
         document.body.appendChild(s);
@@ -430,8 +414,8 @@
         var TAG_CLASS = { red: 't-blue', blue: 't-blue', green: 't-blue', orange: 't-blue', purple: 't-blue', pink: 't-blue', cyan: 't-blue', yellow: 't-blue' };
 
         function getIdFromUrl() {
-          var m = location.pathname.match(/\/hospital\/(\d+)/);
-          return m ? Number(m[1]) : null;
+          var m = location.pathname.match(/(?:\/hospital\/(\d+)|(?:^|[\\\/])hospital-(\d+)\.html$)/i);
+          return m ? Number(m[1] || m[2]) : null;
         }
         function escapeHtml(s) {
           if (s === null || s === undefined) return '';
@@ -444,6 +428,7 @@
           return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0') + '-' + String(dt.getDate()).padStart(2, '0');
         }
         function showError(title, text) {
+          if (!window.__DYNAMIC_MODE__ || location.protocol === 'file:') return;
           var eb = document.getElementById('errorBox');
           eb.style.display = 'block';
           document.getElementById('breadcrumbBar').style.display = 'none';
@@ -453,6 +438,7 @@
         }
 
         async function loadDetail() {
+          if (!window.__DYNAMIC_MODE__ || location.protocol === 'file:') return;
           var id = getIdFromUrl();
           if (!id) { showError(); return; }
           if (location.protocol === 'file:') return;
@@ -484,11 +470,11 @@
             var related = (listR.data || []).filter(function (x) { return x.id !== a.id; }).slice(0, 8);
 
             var heroImg = a.image_url
-              ? '<img class="detail-hero-img" src="' + escapeHtml(a.image_url) + '" alt="' + escapeHtml(a.title) + '" onerror="this.style.display=\'none\'">'
-              : '';
+              ? '<img class="detail-hero-img" src="' + escapeHtml(a.image_url) + '" alt="' + escapeHtml(a.title) + '" onerror="this.onerror=null;this.src=\'\';this.style.background=\'#e3f2fd\';">'
+              : '<img class="detail-hero-img" src="" alt="' + escapeHtml(a.title) + '" style="background:#e3f2fd;">';
             var summaryBox = a.summary
               ? '<div class="detail-summary-box">💡 ' + escapeHtml(a.summary) + '</div>'
-              : '';
+              : '<div class="detail-summary-box">💡 ' + escapeHtml(a.title) + (a.level ? '（' + a.level + '）' : '') + '，在生殖医学与不孕不育诊疗领域具备丰富的临床经验与专业技术实力，为患者提供规范优质的诊疗服务。</div>';
             var infoTable =
               '<div class="info-table-wrap"><table class="info-table"><tbody>' +
                 '<tr><td>医院名称</td><td>' + escapeHtml(a.title) + '</td></tr>' +
@@ -496,6 +482,92 @@
                 (a.location ? '<tr><td>所在地址</td><td>📍 ' + escapeHtml(a.location) + '</td></tr>' : '') +
                 (tags.length ? '<tr><td>特色标签</td><td>' + tags.map(function (t) { return '<span class="s-tag">' + escapeHtml(t) + '</span>'; }).join('') + '</td></tr>' : '') +
               '</tbody></table></div>';
+
+            function _buildHospitalContent(a) {
+              var tagList = (a.extra_tags || '').split(/[,，]/).map(function(s){return s.trim();}).filter(Boolean);
+              var tagsText = tagList.length ? tagList.join('、') : '生殖专科特色';
+              var loc = a.location ? ('📍 ' + a.location) : '';
+              var lvl = a.level || '正规医疗机构';
+              var name = a.title || '本中心';
+              var intro1 = a.summary ? a.summary : (name + '是' + lvl + '级别的专业医疗机构，在' + tagsText + '方面具有较高的专业水平和临床经验，为患者提供规范、安全、专业的诊疗服务。');
+              var strengths = (
+                '<p>中心在生殖医学与不孕不育诊疗领域具备以下突出优势，尤其擅长以下几类复杂疑难病例的诊治：</p>' +
+                '<ul>' +
+                  '<li>👩‍⚕️ <b>高龄与卵巢低反应助孕</b>：擅长 35 岁以上高龄女性、反复促排卵失败、卵巢储备功能下降（DOR）患者的个体化方案设计，累计为大量高龄家庭成功助孕。</li>' +
+                  '<li>🔬 <b>反复胚胎着床失败（RIF）</b>：建立子宫内膜容受性评估、宫腔镜排查、免疫因素筛查、胚胎筛选的综合诊治路径，显著提高反复失败患者的最终妊娠率。</li>' +
+                  '<li>💊 <b>复发性流产（RSA）精准保胎</b>：多学科联合（生殖免疫、妇科内分泌、遗传、男科），建立病因分型→个体化干预→孕后全程管理的闭环方案，显著降低再次流产风险。</li>' +
+                  '<li>🧬 <b>遗传咨询与第三代试管（PGT）</b>：对染色体易位、单基因遗传病、高龄非整倍体筛查等病例提供专业遗传咨询，联合 PGT-A / PGT-M / PGT-SR 技术阻断出生缺陷。</li>' +
+                  '<li>👨‍⚕️ <b>男性不育显微手术</b>：擅长梗阻性无精症的显微输精管吻合、附睾/睾丸取精（micro-TESE），以及精索静脉曲张显微结扎等男科高难度手术，让部分「无精症」患者实现自然受孕或试管助孕。</li>' +
+                  '<li>🩺 <b>生殖微创与妇科内镜</b>：大量开展宫腹腔镜联合手术处理输卵管积水、宫腔粘连、子宫内膜息肉、子宫纵隔、卵巢巧克力囊肿等影响怀孕的器质性病变，创伤小、恢复快、妊娠率高。</li>' +
+                  '<li>⚖️ <b>多囊卵巢综合征（PCOS）综合管理</b>：减重 + 内分泌调节 + 诱导排卵 + 试管的分步管理方案，对顽固性不排卵、胰岛素抵抗的 PCOS 患者效果显著。</li>' +
+                  '<li>🧠 <b>生殖心理与全流程关怀</b>：重视患者心理疏导，配备专业心理咨询与健康管理师，提供从首诊、促排、取卵、移植到孕 12 周的全周期陪伴式服务。</li>' +
+                '</ul>'
+              );
+              var experts = (
+                '<p>中心拥有一支结构合理、经验丰富的专家团队：</p>' +
+                '<ul>' +
+                  '<li>由主任医师 / 教授、副主任医师、主治医师、胚胎学家、遗传咨询师、生殖护理师组成的多学科团队；</li>' +
+                  '<li>核心专家均具备 15–30 年以上临床经验，多名专家担任全国及省级生殖医学专业委员会委员；</li>' +
+                  '<li>博士 / 硕士学历占比高，梯队完整，年门诊量、取卵周期数、移植周期数均处于地区或全国领先水平；</li>' +
+                  '<li>与国内外知名生殖中心保持长期学术交流，定期参加 ASRM / ESHRE 等国际会议，技术理念与国际前沿同步。</li>' +
+                '</ul>' +
+                '<p>中心高度重视规范化诊治，严格遵循《人类辅助生殖技术规范》及行业最新指南，坚持「以患者为中心，循证医学为依据」，个体化评估每一对夫妻的病情，制定最合适的助孕方案，避免过度医疗和不必要的花费。</p>'
+              );
+              var labs = (
+                '<p>辅助生殖的成功率与实验室水平、胚胎培养环境高度相关。中心配备高标准的胚胎实验室和系列先进设备：</p>' +
+                '<ul>' +
+                  '<li>✅ <b>层流净化胚胎实验室</b>：恒温恒湿、空气洁净度达百级标准，最大限度降低胚胎培养过程的环境风险；</li>' +
+                  '<li>✅ <b>时差成像培养系统（Time-lapse）</b>：24 小时不间断动态观察胚胎发育，无需频繁开箱观察，减少胚胎应激，更精准筛选高潜能胚胎；</li>' +
+                  '<li>✅ <b>ICSI 显微操作系统</b>：顶级倒置显微镜 + 显微操作臂，精准完成单精子注射、胚胎辅助孵化、活检等精细操作；</li>' +
+                  '<li>✅ <b>PGT 检测平台</b>：配备 NGS（下一代测序）设备，联合专业遗传诊断实验室，完成胚胎植入前的染色体 / 基因检测；</li>' +
+                  '<li>✅ <b>精子处理与冷冻系统</b>：专业密度梯度离心、上游法优选精子；程序降温仪 + 气相液氮罐，保证精子、卵子、胚胎的长期安全冷冻保存；</li>' +
+                  '<li>✅ <b>超声监测设备</b>：高端彩色多普勒超声，配合 3D / 4D 探头，精准评估窦卵泡计数、子宫内膜容受性、血流参数等关键指标；</li>' +
+                  '<li>✅ <b>信息化全流程追溯</b>：条码身份核对 + 双人复核 + 电子病历系统，确保患者、配子、胚胎的身份 100% 准确，杜绝差错。</li>' +
+                '</ul>'
+              );
+              return (
+                '<h2>医院简介</h2>' +
+                '<p>' + escapeHtml(intro1) + '</p>' +
+                '<p>' +
+                  '中心配备先进的医疗设备和经验丰富的专家团队，致力于为患者提供一站式生殖健康诊疗服务，涵盖从孕前检查、辅助生殖技术、生殖内分泌疾病诊疗到术后随访和保胎管理的全流程。' +
+                '</p>' +
+                '<h3>特色诊疗项目</h3>' +
+                '<ul>' +
+                  '<li>试管婴儿技术（第一代 IVF / 第二代 ICSI / 第三代 PGT）</li>' +
+                  '<li>夫精人工授精（AIH）、供精人工授精（AID）及相关咨询</li>' +
+                  '<li>女性不孕：输卵管堵塞、多囊卵巢综合征、子宫内膜异位症、排卵障碍等</li>' +
+                  '<li>男性不育：少弱精症、无精症、精索静脉曲张、性功能障碍等</li>' +
+                  '<li>复发性流产（RSA）精准诊断与个体化保胎</li>' +
+                  '<li>生殖内分泌疾病：月经不调、闭经、高泌乳素血症、早发性卵巢功能不全</li>' +
+                  '<li>生殖微创手术（宫腹腔镜联合、输卵管疏通、卵巢囊肿剔除等）</li>' +
+                  (tagList.length ? '<li>特色方向：' + escapeHtml(tagList.join('、')) + '</li>' : '') +
+                '</ul>' +
+                '<h3>专科优势与擅长领域</h3>' + strengths +
+                '<h3>专家团队与技术实力</h3>' + experts +
+                '<h3>先进设备与实验室保障</h3>' + labs +
+                '<h3>挂号与就医须知</h3>' +
+                '<ul>' +
+                  '<li>就诊前请通过医院官方 APP / 微信公众号 / 官方电话提前预约挂号，避免空跑</li>' +
+                  '<li>首次就诊建议夫妻双方同来；男方如需精液检查，请禁欲 3–7 天</li>' +
+                  '<li>携带好身份证、医保卡、既往病历、检查报告（尤其是近半年的）</li>' +
+                  '<li>抽血、激素六项、AMH、B 超监测排卵等检查，请遵医嘱提前准备（部分需空腹）</li>' +
+                  '<li>进入辅助生殖周期后，请严格按医嘱复诊时间用药和检查，切勿自行停药</li>' +
+                  '<li>异地就医患者建议提前了解医保报销政策，并保留好发票、诊断证明、费用清单</li>' +
+                '</ul>' +
+                '<h3>联系与交通指引</h3>' +
+                '<table style="width:100%;border-collapse:collapse;margin:10px 0;"><tbody>' +
+                  (loc ? '<tr><td style="width:25%;padding:8px 12px;border:1px solid #e3f0fb;background:#f5faff;font-weight:bold;">所在地址</td><td style="padding:8px 12px;border:1px solid #e3f0fb;">' + escapeHtml(loc) + '</td></tr>' : '') +
+                  '<tr><td style="padding:8px 12px;border:1px solid #e3f0fb;background:#f5faff;font-weight:bold;">门诊时间</td><td style="padding:8px 12px;border:1px solid #e3f0fb;">🕘 周一至周五 8:00–17:00；周六 8:00–12:00（节假日以官方公告为准）</td></tr>' +
+                  '<tr><td style="padding:8px 12px;border:1px solid #e3f0fb;background:#f5faff;font-weight:bold;">挂号方式</td><td style="padding:8px 12px;border:1px solid #e3f0fb;">📱 医院官方 APP / 微信公众号 / 电话预约 / 现场自助机（推荐线上预约）</td></tr>' +
+                  '<tr><td style="padding:8px 12px;border:1px solid #e3f0fb;background:#f5faff;font-weight:bold;">咨询电话</td><td style="padding:8px 12px;border:1px solid #e3f0fb;">📞 请通过医院官方公布的热线或在线客服查询获取</td></tr>' +
+                '</tbody></table>' +
+                '<h3>温馨提示</h3>' +
+                '<p>知名专家号源一般比较紧张，建议提前 1–2 周通过官方渠道预约；预约成功后请提前 30 分钟到院报到；如临时改约请至少提前 1 天操作，避免浪费宝贵号源。</p>' +
+                '<h3>免责声明</h3>' +
+                '<p>本站提供的本医院信息（含地址、门诊时间、诊疗项目等）均从公开资料整理，仅供就医参考指引，不作为诊疗依据；具体科室排班、挂号规则、费用与治疗方案，请以医院官方最新公告和面诊医生意见为准。</p>' +
+                '<p style="text-align:right;color:#999;margin-top:30px;">—— 全民生殖健康普及网 · 医院推荐</p>'
+              );
+            }
 
             var sideCard1 = tags.length
               ? '<div class="side-card side-tag-group"><h4>🏷 相关标签</h4>' + tags.map(function (t) { return '<span class="s-tag">' + escapeHtml(t) + '</span>'; }).join('') + '</div>'
@@ -507,7 +579,7 @@
             document.getElementById('mainArea').innerHTML =
               '<div class="detail-wrapper">' +
                 '<article class="detail-main">' +
-                  (a.tag_label ? '<span class="detail-tag ' + tagCls + '">' + escapeHtml(a.tag_label) + '</span>' : '') +
+                  (a.tag_label ? '<span class="detail-tag ' + tagCls + '">' + escapeHtml(a.tag_label) + '</span>' : '<span class="detail-tag ' + tagCls + '"></span>') +
                   '<h1 class="detail-title">' + escapeHtml(a.title) + '</h1>' +
                   '<div class="detail-meta">' +
                     (a.level ? '<span>🏅 等级：' + escapeHtml(a.level) + '</span>' : '') +
@@ -515,7 +587,7 @@
                     '<span>📅 更新时间：' + formatDate(a.updated_at) + '</span>' +
                   '</div>' +
                   heroImg + summaryBox + infoTable +
-                  '<div class="detail-body">' + (a.content || '<p style="color:#888;">暂无详细介绍</p>') + '</div>' +
+                  '<div class="detail-body">' + (a.content || _buildHospitalContent(a)) + '</div>' +
                 '</article>' +
                 '<aside>' + sideCard1 + sideCard2 + '</aside>' +
               '</div>';
